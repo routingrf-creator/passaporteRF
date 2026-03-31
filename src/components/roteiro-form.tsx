@@ -25,38 +25,25 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { useT } from "@/contexts/language-context";
 
 const roteiroSchema = z.object({
-  destino: z.string().min(1, "Informe o destino"),
-  datas: z.string().min(1, "Informe as datas ou duracao"),
-  orcamento: z.string().min(1, "Selecione o orcamento"),
-  estilo: z.string().min(1, "Selecione o estilo de viagem"),
-  pessoas: z.number().min(1, "Minimo de 1 pessoa"),
+  destino: z.string().min(1),
+  datas: z.string().min(1),
+  orcamento: z.string().min(1),
+  estilo: z.string().min(1),
+  pessoas: z.number().min(1),
   preferencias: z.string().optional(),
-  email: z.string().email("Email invalido"),
-  whatsapp: z.string().min(8, "WhatsApp invalido"),
+  email: z.string().email(),
+  whatsapp: z.string().min(8),
 });
 
 type RoteiroFormData = z.infer<typeof roteiroSchema>;
 
-const orcamentoLabels: Record<string, string> = {
-  economico: "Economico",
-  moderado: "Moderado",
-  confortavel: "Confortavel",
-  luxo: "Luxo",
-};
-
-const estiloLabels: Record<string, string> = {
-  romantico: "Romantico",
-  aventura: "Aventura",
-  cultural: "Cultural",
-  relaxante: "Relaxante",
-  gastronomico: "Gastronomico",
-  misto: "Misto",
-};
-
 export function RoteiroForm() {
   const [submitted, setSubmitted] = useState<RoteiroFormData | null>(null);
+  const t = useT();
+  const tf = t.roteiroForm;
 
   const {
     register,
@@ -82,7 +69,7 @@ export function RoteiroForm() {
 
   function onSubmit(data: RoteiroFormData) {
     setSubmitted(data);
-    toast.success("Pedido enviado com sucesso! Entraremos em contato em breve.");
+    toast.success(tf.toast);
   }
 
   return (
@@ -90,7 +77,7 @@ export function RoteiroForm() {
       <Card className="border-passport-blue/20">
         <CardHeader>
           <CardTitle className="text-xl text-passport-dark">
-            Preencha seus dados
+            {tf.title}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -98,11 +85,11 @@ export function RoteiroForm() {
             <div className="space-y-2">
               <Label htmlFor="destino">
                 <MapPin className="size-4 text-passport-coral" />
-                Destino
+                {tf.destino}
               </Label>
               <Input
                 id="destino"
-                placeholder="Ex: Paris, Toscana, Japao..."
+                placeholder={tf.destinoPlaceholder}
                 {...register("destino")}
               />
               {errors.destino && (
@@ -113,11 +100,11 @@ export function RoteiroForm() {
             <div className="space-y-2">
               <Label htmlFor="datas">
                 <Calendar className="size-4 text-passport-coral" />
-                Datas / Duracao
+                {tf.datas}
               </Label>
               <Input
                 id="datas"
-                placeholder="Ex: 15 a 25 de julho ou 10 dias"
+                placeholder={tf.datasPlaceholder}
                 {...register("datas")}
               />
               {errors.datas && (
@@ -127,13 +114,13 @@ export function RoteiroForm() {
 
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
-                <Label>Orcamento</Label>
+                <Label>{tf.orcamento}</Label>
                 <Select onValueChange={(val) => setValue("orcamento", val)}>
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Selecione" />
+                    <SelectValue placeholder={tf.selecione} />
                   </SelectTrigger>
                   <SelectContent>
-                    {Object.entries(orcamentoLabels).map(([value, label]) => (
+                    {Object.entries(tf.orcamentoLabels).map(([value, label]) => (
                       <SelectItem key={value} value={value}>
                         {label}
                       </SelectItem>
@@ -146,13 +133,13 @@ export function RoteiroForm() {
               </div>
 
               <div className="space-y-2">
-                <Label>Estilo de viagem</Label>
+                <Label>{tf.estilo}</Label>
                 <Select onValueChange={(val) => setValue("estilo", val)}>
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Selecione" />
+                    <SelectValue placeholder={tf.selecione} />
                   </SelectTrigger>
                   <SelectContent>
-                    {Object.entries(estiloLabels).map(([value, label]) => (
+                    {Object.entries(tf.estiloLabels).map(([value, label]) => (
                       <SelectItem key={value} value={value}>
                         {label}
                       </SelectItem>
@@ -168,13 +155,13 @@ export function RoteiroForm() {
             <div className="space-y-2">
               <Label htmlFor="pessoas">
                 <Users className="size-4 text-passport-coral" />
-                Numero de pessoas
+                {tf.pessoas}
               </Label>
               <Input
                 id="pessoas"
                 type="number"
                 min={1}
-                placeholder="Ex: 2"
+                placeholder={tf.pessoasPlaceholder}
                 {...register("pessoas", { valueAsNumber: true })}
               />
               {errors.pessoas && (
@@ -183,10 +170,10 @@ export function RoteiroForm() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="preferencias">Preferencias (opcional)</Label>
+              <Label htmlFor="preferencias">{tf.preferencias}</Label>
               <Textarea
                 id="preferencias"
-                placeholder="Conte o que voce mais gosta de fazer em viagem..."
+                placeholder={tf.preferenciasPlaceholder}
                 rows={3}
                 {...register("preferencias")}
               />
@@ -198,12 +185,12 @@ export function RoteiroForm() {
               <div className="space-y-2">
                 <Label htmlFor="email">
                   <Mail className="size-4 text-passport-coral" />
-                  Email
+                  {tf.email}
                 </Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="seu@email.com"
+                  placeholder={tf.emailPlaceholder}
                   {...register("email")}
                 />
                 {errors.email && (
@@ -214,12 +201,12 @@ export function RoteiroForm() {
               <div className="space-y-2">
                 <Label htmlFor="whatsapp">
                   <Phone className="size-4 text-passport-coral" />
-                  WhatsApp
+                  {tf.whatsapp}
                 </Label>
                 <Input
                   id="whatsapp"
                   type="tel"
-                  placeholder="(11) 99999-9999"
+                  placeholder={tf.whatsappPlaceholder}
                   {...register("whatsapp")}
                 />
                 {errors.whatsapp && (
@@ -235,7 +222,7 @@ export function RoteiroForm() {
               className="w-full bg-passport-coral hover:bg-passport-coral/90 text-white"
             >
               <Send className="size-4" />
-              Solicitar roteiro
+              {tf.submit}
             </Button>
           </form>
         </CardContent>
@@ -251,34 +238,34 @@ export function RoteiroForm() {
         >
           <CardHeader>
             <CardTitle className="text-xl text-passport-dark">
-              {submitted ? "Resumo do pedido" : "Pre-visualizacao"}
+              {submitted ? tf.summaryTitle : tf.previewTitle}
             </CardTitle>
           </CardHeader>
           <CardContent>
             {submitted ? (
               <div className="space-y-4">
-                <SummaryRow label="Destino" value={submitted.destino} />
-                <SummaryRow label="Datas" value={submitted.datas} />
+                <SummaryRow label={tf.destino} value={submitted.destino} />
+                <SummaryRow label={tf.datas} value={submitted.datas} />
                 <SummaryRow
-                  label="Orcamento"
-                  value={orcamentoLabels[submitted.orcamento] ?? submitted.orcamento}
+                  label={tf.orcamento}
+                  value={tf.orcamentoLabels[submitted.orcamento as keyof typeof tf.orcamentoLabels] ?? submitted.orcamento}
                 />
                 <SummaryRow
-                  label="Estilo"
-                  value={estiloLabels[submitted.estilo] ?? submitted.estilo}
+                  label={tf.estilo}
+                  value={tf.estiloLabels[submitted.estilo as keyof typeof tf.estiloLabels] ?? submitted.estilo}
                 />
                 <SummaryRow
-                  label="Pessoas"
+                  label={tf.pessoas}
                   value={String(submitted.pessoas)}
                 />
                 {submitted.preferencias && (
-                  <SummaryRow label="Preferencias" value={submitted.preferencias} />
+                  <SummaryRow label={tf.preferencias} value={submitted.preferencias} />
                 )}
                 <Separator />
-                <SummaryRow label="Email" value={submitted.email} />
-                <SummaryRow label="WhatsApp" value={submitted.whatsapp} />
+                <SummaryRow label={tf.email} value={submitted.email} />
+                <SummaryRow label={tf.whatsapp} value={submitted.whatsapp} />
                 <div className="mt-4 rounded-lg bg-green-50 p-3 text-center text-sm font-medium text-green-700">
-                  Pedido enviado! Entraremos em contato em breve.
+                  {tf.pedidoEnviado}
                 </div>
               </div>
             ) : (
@@ -286,31 +273,31 @@ export function RoteiroForm() {
                 {watchedValues.destino ? (
                   <>
                     <SummaryRow
-                      label="Destino"
+                      label={tf.destino}
                       value={watchedValues.destino || "-"}
                     />
                     <SummaryRow
-                      label="Datas"
+                      label={tf.datas}
                       value={watchedValues.datas || "-"}
                     />
                     <SummaryRow
-                      label="Orcamento"
+                      label={tf.orcamento}
                       value={
-                        orcamentoLabels[watchedValues.orcamento] ||
+                        tf.orcamentoLabels[watchedValues.orcamento as keyof typeof tf.orcamentoLabels] ||
                         watchedValues.orcamento ||
                         "-"
                       }
                     />
                     <SummaryRow
-                      label="Estilo"
+                      label={tf.estilo}
                       value={
-                        estiloLabels[watchedValues.estilo] ||
+                        tf.estiloLabels[watchedValues.estilo as keyof typeof tf.estiloLabels] ||
                         watchedValues.estilo ||
                         "-"
                       }
                     />
                     <SummaryRow
-                      label="Pessoas"
+                      label={tf.pessoas}
                       value={
                         watchedValues.pessoas
                           ? String(watchedValues.pessoas)
@@ -320,8 +307,7 @@ export function RoteiroForm() {
                   </>
                 ) : (
                   <p className="text-center text-sm text-muted-foreground">
-                    Preencha o formulario para ver a pre-visualizacao do seu
-                    pedido aqui.
+                    {tf.previewEmpty}
                   </p>
                 )}
               </div>
@@ -334,11 +320,10 @@ export function RoteiroForm() {
             <CardContent className="pt-6">
               <div className="flex items-start gap-3">
                 <Badge className="shrink-0 bg-passport-yellow text-passport-dark">
-                  Dica
+                  {tf.dica}
                 </Badge>
                 <p className="text-sm text-muted-foreground">
-                  Quanto mais detalhes voce preencher, mais personalizado sera o
-                  seu roteiro. Nao economize nas preferencias!
+                  {tf.dicaText}
                 </p>
               </div>
             </CardContent>

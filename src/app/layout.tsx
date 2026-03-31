@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
+import { LanguageProvider } from "@/contexts/language-context";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -20,16 +21,58 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "PassaporteRF | Roteiros de Viagem Personalizados",
+  title: {
+    default: "PassaporteRF | Roteiros de Viagem Personalizados",
+    template: "%s | PassaporteRF",
+  },
   description:
     "Rafa & Fe ajudam voce a viver viagens unicas com roteiros 100% personalizados. Descubra destinos incriveis, dicas praticas e experiencias autenticas.",
+  keywords: [
+    "roteiros de viagem",
+    "viagem personalizada",
+    "travel influencer",
+    "dicas de viagem",
+    "PassaporteRF",
+    "Rafa e Fe",
+    "consultoria de viagem",
+    "roteiro europa",
+    "roteiro asia",
+    "e-books viagem",
+  ],
+  authors: [{ name: "PassaporteRF", url: "https://passaporterf.com" }],
+  creator: "PassaporteRF",
+  metadataBase: new URL("https://passaporterf.com"),
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   openGraph: {
     title: "PassaporteRF | Roteiros de Viagem Personalizados",
     description:
       "Rafa & Fe ajudam voce a viver viagens unicas com roteiros 100% personalizados. Descubra destinos incriveis, dicas praticas e experiencias autenticas.",
-    type: "website",
-    locale: "pt_BR",
+    url: "https://passaporterf.com",
     siteName: "PassaporteRF",
+    images: [
+      {
+        url: "/logo.png",
+        width: 800,
+        height: 600,
+        alt: "PassaporteRF - Roteiros de Viagem Personalizados",
+      },
+    ],
+    locale: "pt_BR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "PassaporteRF | Roteiros de Viagem Personalizados",
+    description:
+      "Rafa & Fe ajudam voce a viver viagens unicas com roteiros 100% personalizados.",
+    images: ["/logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -39,14 +82,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" suppressHydrationWarning>
       <body
         className={`${poppins.variable} ${inter.variable} font-sans antialiased`}
       >
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
-        <Toaster />
+        <LanguageProvider>
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+          <Toaster />
+        </LanguageProvider>
       </body>
     </html>
   );

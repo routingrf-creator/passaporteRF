@@ -22,24 +22,21 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useT } from "@/contexts/language-context";
 
 const contatoSchema = z.object({
-  nome: z.string().min(1, "Informe seu nome"),
-  email: z.string().email("Email invalido"),
-  assunto: z.string().min(1, "Selecione o assunto"),
-  mensagem: z.string().min(10, "Mensagem deve ter pelo menos 10 caracteres"),
+  nome: z.string().min(1),
+  email: z.string().email(),
+  assunto: z.string().min(1),
+  mensagem: z.string().min(10),
 });
 
 type ContatoFormData = z.infer<typeof contatoSchema>;
 
-const assuntos = [
-  { value: "roteiro", label: "Duvida sobre roteiro" },
-  { value: "parceria", label: "Parceria" },
-  { value: "sugestao", label: "Sugestao" },
-  { value: "outro", label: "Outro" },
-];
-
 export function ContatoForm() {
+  const t = useT();
+  const tc = t.contatoForm;
+
   const {
     register,
     handleSubmit,
@@ -56,8 +53,8 @@ export function ContatoForm() {
     },
   });
 
-  function onSubmit(data: ContatoFormData) {
-    toast.success("Mensagem enviada com sucesso! Responderemos em ate 48h.");
+  function onSubmit(_data: ContatoFormData) {
+    toast.success(tc.toast);
     reset();
   }
 
@@ -65,16 +62,16 @@ export function ContatoForm() {
     <Card>
       <CardHeader>
         <CardTitle className="text-xl text-passport-dark">
-          Envie sua mensagem
+          {tc.title}
         </CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div className="space-y-2">
-            <Label htmlFor="ct-nome">Nome</Label>
+            <Label htmlFor="ct-nome">{tc.nome}</Label>
             <Input
               id="ct-nome"
-              placeholder="Seu nome"
+              placeholder={tc.nomePlaceholder}
               {...register("nome")}
             />
             {errors.nome && (
@@ -83,7 +80,7 @@ export function ContatoForm() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="ct-email">Email</Label>
+            <Label htmlFor="ct-email">{tc.email}</Label>
             <Input
               id="ct-email"
               type="email"
@@ -96,13 +93,13 @@ export function ContatoForm() {
           </div>
 
           <div className="space-y-2">
-            <Label>Assunto</Label>
+            <Label>{tc.assunto}</Label>
             <Select onValueChange={(val) => setValue("assunto", val)}>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Selecione o assunto" />
+                <SelectValue placeholder={tc.assuntoPlaceholder} />
               </SelectTrigger>
               <SelectContent>
-                {assuntos.map((a) => (
+                {tc.assuntos.map((a) => (
                   <SelectItem key={a.value} value={a.value}>
                     {a.label}
                   </SelectItem>
@@ -117,10 +114,10 @@ export function ContatoForm() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="ct-mensagem">Mensagem</Label>
+            <Label htmlFor="ct-mensagem">{tc.mensagem}</Label>
             <Textarea
               id="ct-mensagem"
-              placeholder="Como podemos ajudar?"
+              placeholder={tc.mensagemPlaceholder}
               rows={5}
               {...register("mensagem")}
             />
@@ -138,7 +135,7 @@ export function ContatoForm() {
             className="w-full bg-passport-coral hover:bg-passport-coral/90 text-white"
           >
             <Send className="size-4" />
-            Enviar mensagem
+            {tc.submit}
           </Button>
         </form>
       </CardContent>

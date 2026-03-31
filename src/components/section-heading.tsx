@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface SectionHeadingProps {
@@ -14,22 +17,31 @@ export function SectionHeading({
   className,
 }: SectionHeadingProps) {
   return (
-    <div className={cn(centered && "text-center", className)}>
-      <div
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={cn("mb-12", centered && "text-center", className)}
+    >
+      <motion.div
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: 0.2 }}
         className={cn(
-          "mb-3 h-1 w-10 rounded-full bg-passport-coral",
+          "mb-4 h-1 w-10 origin-left rounded-full bg-passport-coral",
           centered && "mx-auto"
         )}
-        aria-hidden="true"
       />
-      <h2 className="text-2xl font-bold tracking-tight text-passport-ink sm:text-3xl lg:text-4xl">
+      <h2 className="text-2xl font-bold tracking-tight text-passport-dark sm:text-3xl lg:text-4xl">
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-2 text-base text-muted-foreground sm:text-lg">
+        <p className="mt-3 text-base text-muted-foreground sm:text-lg">
           {subtitle}
         </p>
       )}
-    </div>
+    </motion.div>
   );
 }

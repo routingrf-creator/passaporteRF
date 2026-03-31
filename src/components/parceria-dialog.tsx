@@ -18,17 +18,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useT } from "@/contexts/language-context";
 
 const midiaKitSchema = z.object({
-  nome: z.string().min(1, "Informe seu nome"),
-  email: z.string().email("Email invalido"),
+  nome: z.string().min(1),
+  email: z.string().email(),
   empresa: z.string().optional(),
-  mensagem: z.string().min(1, "Escreva uma mensagem"),
+  mensagem: z.string().min(1),
 });
 
 type MidiaKitFormData = z.infer<typeof midiaKitSchema>;
 
 export function ParceriaDialog() {
+  const t = useT();
+  const tp = t.parceriaDialog;
+
   const {
     register,
     handleSubmit,
@@ -44,8 +48,8 @@ export function ParceriaDialog() {
     },
   });
 
-  function onSubmit(data: MidiaKitFormData) {
-    toast.success("Solicitacao enviada com sucesso! Entraremos em contato em breve.");
+  function onSubmit(_data: MidiaKitFormData) {
+    toast.success(tp.toast);
     reset();
   }
 
@@ -57,15 +61,13 @@ export function ParceriaDialog() {
           className="bg-passport-coral hover:bg-passport-coral/90 text-white"
         >
           <Mail className="size-4" />
-          Solicitar midia kit
+          {tp.button}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Solicitar midia kit</DialogTitle>
-          <DialogDescription>
-            Preencha seus dados e entraremos em contato.
-          </DialogDescription>
+          <DialogTitle>{tp.title}</DialogTitle>
+          <DialogDescription>{tp.desc}</DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="rounded-md bg-muted px-3 py-2 text-sm text-muted-foreground">
@@ -73,15 +75,15 @@ export function ParceriaDialog() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="mk-nome">Nome</Label>
-            <Input id="mk-nome" placeholder="Seu nome" {...register("nome")} />
+            <Label htmlFor="mk-nome">{tp.nome}</Label>
+            <Input id="mk-nome" placeholder={tp.nomePlaceholder} {...register("nome")} />
             {errors.nome && (
               <p className="text-sm text-destructive">{errors.nome.message}</p>
             )}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="mk-email">Email</Label>
+            <Label htmlFor="mk-email">{tp.email}</Label>
             <Input
               id="mk-email"
               type="email"
@@ -94,19 +96,19 @@ export function ParceriaDialog() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="mk-empresa">Empresa (opcional)</Label>
+            <Label htmlFor="mk-empresa">{tp.empresa}</Label>
             <Input
               id="mk-empresa"
-              placeholder="Nome da empresa"
+              placeholder={tp.empresaPlaceholder}
               {...register("empresa")}
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="mk-mensagem">Mensagem</Label>
+            <Label htmlFor="mk-mensagem">{tp.mensagem}</Label>
             <Textarea
               id="mk-mensagem"
-              placeholder="Conte sobre a parceria que tem em mente..."
+              placeholder={tp.mensagemPlaceholder}
               rows={3}
               {...register("mensagem")}
             />
@@ -124,7 +126,7 @@ export function ParceriaDialog() {
               className="w-full bg-passport-coral hover:bg-passport-coral/90 text-white sm:w-auto"
             >
               <Send className="size-4" />
-              Enviar
+              {tp.submit}
             </Button>
           </DialogFooter>
         </form>

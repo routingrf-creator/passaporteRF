@@ -95,3 +95,38 @@
 html {
   scroll-behavior: smooth;
 }
+
+.glass {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+.glass-hover:hover {
+  border-color: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 12px 48px rgba(30, 111, 175, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.glass-dark {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Hero bento grid */
+@media (min-width: 640px) {
+  .hero-grid {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(5, 22vh);
+    grid-auto-rows: auto;
+    grid-auto-flow: row;
+  }
+  .hero-grid > * {
+    grid-area: var(--area);
+  }
+}

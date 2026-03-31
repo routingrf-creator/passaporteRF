@@ -9,7 +9,7 @@ export const faqs: FAQ[] = [
   {
     question: "Quanto tempo demora para receber o roteiro?",
     answer:
-      "Apos o pagamento e preenchimento do formulario, o roteiro fica pronto em ate 7 dias uteis. Para pedidos urgentes, temos a opcao de Consultoria Express.",
+      "Apos o pagamento, preenchimento do formulario e todas as informacoes necessarias recebidas, o roteiro fica pronto em ate 5 dias uteis. Para pedidos urgentes, temos a opcao de Consultoria Express.",
   },
   {
     question: "Posso pedir alteracoes no roteiro?",
@@ -29,11 +29,6 @@ export const faqs: FAQ[] = [
   {
     question: "Quais formas de pagamento sao aceitas?",
     answer:
-      "Aceitamos PIX, cartao de credito (em ate 3x sem juros) e transferencia bancaria.",
-  },
-  {
-    question: "Voces fazem roteiros para qualquer destino?",
-    answer:
-      "Montamos roteiros para destinos que ja conhecemos pessoalmente. Se for um destino que ainda nao visitamos, indicamos parceiros de confianca.",
+      "Aceitamos PIX, cartao de credito, transferencia bancaria e Revolut.",
   },
 ];
