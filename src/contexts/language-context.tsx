@@ -36,21 +36,17 @@ function detectBrowserLocale(): Locale {
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("pt");
-  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as Locale | null;
     const initial = stored ?? detectBrowserLocale();
     setLocaleState(initial);
-    setHydrated(true);
   }, []);
 
   function setLocale(next: Locale) {
     setLocaleState(next);
     localStorage.setItem(STORAGE_KEY, next);
   }
-
-  if (!hydrated) return <>{children}</>;
 
   return (
     <LanguageContext.Provider value={{ locale, setLocale }}>

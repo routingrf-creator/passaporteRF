@@ -155,7 +155,9 @@ export function Footer() {
           transition={{ delay: 0.4 }}
           className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/50"
         >
-          &copy; {new Date().getFullYear()} PassaporteRF. {t.footer.direitos}
+          &copy;{" "}
+          <span suppressHydrationWarning>{new Date().getFullYear()}</span>{" "}
+          PassaporteRF. {t.footer.direitos}
         </motion.div>
       </div>
     </footer>
