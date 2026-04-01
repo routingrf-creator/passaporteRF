@@ -74,6 +74,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  other: {
+    "impact-site-verification": "650495f9-8e86-499e-9aa2-f8b4b81f0f8a",
+  },
 };
 
 export default function RootLayout({

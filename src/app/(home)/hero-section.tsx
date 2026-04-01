@@ -32,8 +32,8 @@ const HERO_MEDIA: {
   { src: "/hero/IMG_6358.jpg", type: "photo", area: "3/3/5/4", span: 2, pos: "center 50%" },
   { src: "/hero/1bee1154-11ea-4d47-8975-502ac50c40ee.jpg", type: "photo", area: "5/3/6/4", span: 1, pos: "center 20%" },
 
-  // c4: P8 sm (r1) + V3 tall (r2-3) + P9 tall (r4-5)
-  { src: "/hero/IMG_0233.JPG", type: "photo", area: "1/4/2/5", span: 1, pos: "center 0%" },
+  // c4: P8 (r1-2) + V3 tall (r2-3) + P9 tall (r4-5)
+  { src: "/hero/IMG_0233.JPG", type: "photo", area: "1/4/2/5", span: 2, pos: "center 0%" },
   { src: "/hero/IMG_3364.mp4", type: "video", area: "2/4/4/5", span: 2, pos: "center 20%" },
   { src: "/hero/IMG_3633_Original.JPG", type: "photo", area: "4/4/6/5", span: 2, pos: "center 40%" },
 
@@ -62,7 +62,7 @@ export function HeroSection() {
       {/* Bento media grid */}
       <div
         className="hero-grid absolute grid grid-cols-3 auto-rows-[16vh] gap-0.5 grid-flow-dense"
-        style={{ inset: "-12px" }}
+        style={{ inset: "-20px" }}
       >
         {HERO_MEDIA.map((item, i) => (
           <div

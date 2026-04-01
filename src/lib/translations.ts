@@ -10,6 +10,7 @@ type DeepStringShape<T> =
 
 const pt = {
     nav: {
+      home: "Home",
       destinos: "Destinos",
       roteiros: "Roteiros",
       sobre: "Sobre",
@@ -324,6 +325,11 @@ const pt = {
       metricsSubtitle: "Dados reais de alcance e engajamento",
       parceirosTitle: "Parceiros",
       parceirosSubtitle: "Marcas que confiam no nosso trabalho",
+      afiliadosTitle: "Descontos exclusivos para você",
+      afiliadosSubtitle: "Aproveite cupons e ofertas especiais dos nossos parceiros",
+      usarCupom: "Usar cupom",
+      acessar: "Acessar",
+      copiarCodigo: "Código copiado!",
       ctaTitle: "Quer saber mais?",
       ctaSubtitle:
         "Solicite nosso mídia kit e receba todos os dados, cases e formatos de parceria disponíveis.",
@@ -430,6 +436,7 @@ const pt = {
 
   const en = {
     nav: {
+      home: "Home",
       destinos: "Destinations",
       roteiros: "Itineraries",
       sobre: "About",
@@ -744,6 +751,11 @@ const pt = {
       metricsSubtitle: "Real reach and engagement data",
       parceirosTitle: "Partners",
       parceirosSubtitle: "Brands that trust our work",
+      afiliadosTitle: "Exclusive discounts for you",
+      afiliadosSubtitle: "Take advantage of coupons and special offers from our partners",
+      usarCupom: "Use coupon",
+      acessar: "Visit",
+      copiarCodigo: "Code copied!",
       ctaTitle: "Want to know more?",
       ctaSubtitle:
         "Request our media kit and receive all data, case studies and available partnership formats.",
@@ -846,6 +858,7 @@ const pt = {
 
   const es = {
     nav: {
+      home: "Inicio",
       destinos: "Destinos",
       roteiros: "Itinerarios",
       sobre: "Sobre nosotros",
@@ -1160,6 +1173,11 @@ const pt = {
       metricsSubtitle: "Datos reales de alcance y engagement",
       parceirosTitle: "Socios",
       parceirosSubtitle: "Marcas que confían en nuestro trabajo",
+      afiliadosTitle: "Descuentos exclusivos para ti",
+      afiliadosSubtitle: "Aprovecha cupones y ofertas especiales de nuestros socios",
+      usarCupom: "Usar cupón",
+      acessar: "Acceder",
+      copiarCodigo: "¡Código copiado!",
       ctaTitle: "¿Quieres saber más?",
       ctaSubtitle:
         "Solicita nuestro kit de medios y recibe todos los datos, casos y formatos de asociación disponibles.",
@@ -1266,6 +1284,7 @@ const pt = {
 
   const fr = {
     nav: {
+      home: "Accueil",
       destinos: "Destinations",
       roteiros: "Itinéraires",
       sobre: "À propos",
@@ -1554,6 +1573,11 @@ const pt = {
       metricsSubtitle: "Données réelles de portée et d'engagement",
       parceirosTitle: "Partenaires",
       parceirosSubtitle: "Marques qui font confiance à notre travail",
+      afiliadosTitle: "Réductions exclusives pour vous",
+      afiliadosSubtitle: "Profitez de coupons et d'offres spéciales de nos partenaires",
+      usarCupom: "Utiliser le coupon",
+      acessar: "Accéder",
+      copiarCodigo: "Code copié !",
       ctaTitle: "Vous voulez en savoir plus ?",
       ctaSubtitle: "Demandez notre kit média et recevez toutes les données, études de cas et formats de partenariat disponibles.",
       formatos: [
@@ -1654,6 +1678,7 @@ const pt = {
 
   const de = {
     nav: {
+      home: "Startseite",
       destinos: "Reiseziele",
       roteiros: "Reisepläne",
       sobre: "Über uns",
@@ -1941,6 +1966,11 @@ const pt = {
       metricsSubtitle: "Echte Daten zu Reichweite und Engagement",
       parceirosTitle: "Partner",
       parceirosSubtitle: "Marken, die unserer Arbeit vertrauen",
+      afiliadosTitle: "Exklusive Rabatte für Sie",
+      afiliadosSubtitle: "Nutzen Sie Gutscheine und Sonderangebote unserer Partner",
+      usarCupom: "Gutschein verwenden",
+      acessar: "Zugreifen",
+      copiarCodigo: "Code kopiert!",
       ctaTitle: "Möchten Sie mehr erfahren?",
       ctaSubtitle: "Fordern Sie unser Medienkit an und erhalten Sie alle Daten, Fallstudien und verfügbaren Partnerschaftsformate.",
       formatos: [

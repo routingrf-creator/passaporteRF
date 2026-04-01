@@ -49,6 +49,7 @@ export function Navbar() {
   const t = useT();
 
   const navLinks = [
+    { label: t.nav.home, href: "/" },
     { label: t.nav.destinos, href: "/destinos" },
     { label: t.nav.roteiros, href: "/roteiros" },
     { label: t.nav.sobre, href: "/sobre" },
@@ -87,7 +88,10 @@ export function Navbar() {
         {/* Desktop nav */}
         <ul className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => {
-            const isActive = pathname.startsWith(link.href);
+            const isActive =
+              link.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(link.href);
             return (
               <li key={link.href}>
                 <Link
@@ -182,7 +186,10 @@ export function Navbar() {
             </SheetHeader>
             <nav className="flex flex-col gap-1 px-4" aria-label="Menu mobile">
               {navLinks.map((link, i) => {
-                const isActive = pathname.startsWith(link.href);
+                const isActive =
+                  link.href === "/"
+                    ? pathname === "/"
+                    : pathname.startsWith(link.href);
                 return (
                   <motion.div
                     key={link.href}
