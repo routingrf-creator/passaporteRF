@@ -9,66 +9,35 @@ import { useT } from "@/contexts/language-context";
 const HERO_MEDIA: {
   src: string;
   type: "photo" | "video";
-  area: string;
-  span: number;
   pos: string;
 }[] = [
-  // area = row-start / col-start / row-end / col-end
-  // span = mobile row-span
-  // pos = object-position (ex: "center 20%", "center top", "center center")
-
-  // c1: V1 tall (r1-2) + P1 tall (r3-4) + P2 sm (r5)
-  { src: "/hero/IMG_5393.mp4", type: "video", area: "1/1/3/2", span: 3, pos: "center 50%" },
-  { src: "/hero/IMG_1917.jpg", type: "photo", area: "3/1/5/2", span: 2, pos: "center 20%" },
-  { src: "/hero/IMG_8719.jpg", type: "photo", area: "5/1/6/2", span: 1, pos: "center 20%" },
-
-  // c2: P3 tall (r1-2) + P4 tall (r3-4) + P5 sm (r5)
-  { src: "/hero/IMG_3479_Original.JPG", type: "photo", area: "1/2/3/3", span: 2, pos: "center 20%" },
-  { src: "/hero/IMG_4064.jpg", type: "photo", area: "3/2/5/3", span: 2, pos: "center 40%" },
-  { src: "/hero/761AAA04-36F2-4514-A9A2-D1C999F46912.jpg", type: "photo", area: "5/2/6/3", span: 1, pos: "center 20%" },
-
-  // c3: V2 tall (r1-2) + P6 tall (r3-4) + P7 sm (r5)
-  { src: "/hero/IMG_0169.mp4", type: "video", area: "1/3/3/4", span: 3, pos: "center 10%" },
-  { src: "/hero/IMG_6358.jpg", type: "photo", area: "3/3/5/4", span: 2, pos: "center 50%" },
-  { src: "/hero/1bee1154-11ea-4d47-8975-502ac50c40ee.jpg", type: "photo", area: "5/3/6/4", span: 1, pos: "center 20%" },
-
-  // c4: P8 (r1-2) + V3 tall (r2-3) + P9 tall (r4-5)
-  { src: "/hero/IMG_0233.JPG", type: "photo", area: "1/4/2/5", span: 2, pos: "center 0%" },
-  { src: "/hero/IMG_3364.mp4", type: "video", area: "2/4/4/5", span: 2, pos: "center 20%" },
-  { src: "/hero/IMG_3633_Original.JPG", type: "photo", area: "4/4/6/5", span: 2, pos: "center 40%" },
-
-  // c5: P10 tall (r1-2) + V4 tall (r3-4) + P11 sm (r5)
-  { src: "/hero/IMG_5768.jpg", type: "photo", area: "1/5/3/6", span: 2, pos: "center 50%" },
-  { src: "/hero/IMG_0147.mp4", type: "video", area: "3/5/5/6", span: 2, pos: "center 20%" },
-  { src: "/hero/dd8a8f85-5a6c-4c30-860a-581d493adf8a.jpg", type: "photo", area: "5/5/6/6", span: 1, pos: "center 20%" },
-
-  // c6: P12 tall (r1-2) + P13 tall (r3-4) + Pdup sm (r5)
-  { src: "/hero/IMG_6882.JPG", type: "photo", area: "1/6/3/7", span: 2, pos: "center 20%" },
-  { src: "/hero/IMG_3566_Original.JPG", type: "photo", area: "3/6/5/7", span: 2, pos: "center 90%" },
-  { src: "/hero/761AAA04-36F2-4514-A9A2-D1C999F46912.jpg", type: "photo", area: "5/6/6/7", span: 1, pos: "center 20%" },
+  // First 6: visible on mobile (3×2) and desktop (first row of 6×2)
+  { src: "/hero/IMG_5393.mp4", type: "video", pos: "center 50%" },
+  { src: "/hero/IMG_3479_Original.JPG", type: "photo", pos: "center 20%" },
+  { src: "/hero/IMG_0169.mp4", type: "video", pos: "center 10%" },
+  { src: "/hero/IMG_0233.JPG", type: "photo", pos: "center 0%" },
+  { src: "/hero/IMG_5768.jpg", type: "photo", pos: "center 50%" },
+  { src: "/hero/IMG_6882.JPG", type: "photo", pos: "center 20%" },
+  // Last 6: hidden on mobile, desktop second row
+  { src: "/hero/IMG_1917.jpg", type: "photo", pos: "center 20%" },
+  { src: "/hero/IMG_4064.jpg", type: "photo", pos: "center 40%" },
+  { src: "/hero/IMG_3364.mp4", type: "video", pos: "center 20%" },
+  { src: "/hero/IMG_6358.jpg", type: "photo", pos: "center 50%" },
+  { src: "/hero/IMG_0147.mp4", type: "video", pos: "center 20%" },
+  { src: "/hero/IMG_3566_Original.JPG", type: "photo", pos: "center 90%" },
 ];
-
-const SPAN_CLASS: Record<number, string> = {
-  1: "",
-  2: "row-span-2",
-  3: "row-span-3",
-};
 
 export function HeroSection() {
   const t = useT();
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-passport-dark sm:min-h-[90vh]">
-      {/* Bento media grid */}
-      <div
-        className="hero-grid absolute grid grid-cols-3 auto-rows-[16vh] gap-0.5 grid-flow-dense"
-        style={{ inset: "-20px" }}
-      >
+    <section className="relative h-[100svh] overflow-hidden bg-passport-dark">
+      {/* Media grid — 3×2 mobile, 6×2 desktop */}
+      <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 sm:grid-cols-6 sm:grid-rows-2">
         {HERO_MEDIA.map((item, i) => (
           <div
             key={i}
-            className={`relative overflow-hidden rounded-sm ${SPAN_CLASS[item.span]}`}
-            style={{ "--area": item.area } as React.CSSProperties}
+            className={`relative overflow-hidden ${i >= 6 ? "hidden sm:block" : ""}`}
           >
             {item.type === "video" ? (
               <video
@@ -104,7 +73,7 @@ export function HeroSection() {
       />
 
       {/* Content */}
-      <div className="pointer-events-none relative z-20 flex min-h-[100svh] items-end pb-16 sm:min-h-[90vh] sm:items-center sm:pb-0">
+      <div className="pointer-events-none relative z-20 flex h-[100svh] items-end pb-16 sm:items-center sm:pb-0">
         <div className="mx-auto w-full max-w-7xl px-5 py-12 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
