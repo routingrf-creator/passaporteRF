@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, MapPin, Calendar, Users, Mail, Phone, Sparkles } from "lucide-react";
 import { toast } from "sonner";
+import { sendEmail } from "@/lib/emailjs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,16 +39,31 @@ export function ConsultoriaSection() {
     const email = data.get("email") as string;
     const whatsapp = data.get("whatsapp") as string;
 
-    const subject = encodeURIComponent(`Consultoria de Roteiro - ${destino}`);
-    const body = encodeURIComponent(
-      `Oi Rafa & Fe!\n\nGostaria de uma consultoria de roteiro.\n\nDestino: ${destino}\nDatas/Duracao: ${datas}\nPessoas: ${pessoas}\nEstilo: ${estilo}\n\n${mensagem ? `Observacoes: ${mensagem}\n\n` : ""}Email para contato: ${email}\nWhatsApp: ${whatsapp}`
-    );
-
-    window.location.href = `mailto:passaporterf@gmail.com?subject=${subject}&body=${body}`;
-
-    setSending(false);
-    toast.success(tc.toast);
-    form.reset();
+    try {
+      await sendEmail({
+        subject: `Nova consultoria de roteiro - ${destino}`,
+        from_email: email,
+        body: [
+          `Destino: ${destino}`,
+          `Datas/Duracao: ${datas}`,
+          `Pessoas: ${pessoas}`,
+          `Estilo: ${estilo}`,
+          ``,
+          `Observacoes:`,
+          mensagem || "(nenhuma)",
+          ``,
+          `Contato:`,
+          `Email: ${email}`,
+          `WhatsApp: ${whatsapp}`,
+        ].join("\n"),
+      });
+      toast.success(tc.toast);
+      form.reset();
+    } catch {
+      toast.error("Erro ao enviar consultoria. Tente novamente.");
+    } finally {
+      setSending(false);
+    }
   }
 
   return (

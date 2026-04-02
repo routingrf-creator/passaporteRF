@@ -6,6 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Send, MapPin, Calendar, Users, Mail, Phone } from "lucide-react";
+import { sendEmail } from "@/lib/emailjs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -67,9 +68,38 @@ export function RoteiroForm() {
 
   const watchedValues = watch();
 
-  function onSubmit(data: RoteiroFormData) {
-    setSubmitted(data);
-    toast.success(tf.toast);
+  async function onSubmit(data: RoteiroFormData) {
+    try {
+      const orcamentoLabel =
+        tf.orcamentoLabels[data.orcamento as keyof typeof tf.orcamentoLabels] ??
+        data.orcamento;
+      const estiloLabel =
+        tf.estiloLabels[data.estilo as keyof typeof tf.estiloLabels] ??
+        data.estilo;
+
+      await sendEmail({
+        subject: `Novo pedido de roteiro - ${data.destino}`,
+        from_email: data.email,
+        body: [
+          `Destino: ${data.destino}`,
+          `Datas/Duracao: ${data.datas}`,
+          `Orcamento: ${orcamentoLabel}`,
+          `Estilo: ${estiloLabel}`,
+          `Pessoas: ${data.pessoas}`,
+          ``,
+          `Preferencias:`,
+          data.preferencias || "(nenhuma)",
+          ``,
+          `Contato:`,
+          `Email: ${data.email}`,
+          `WhatsApp: ${data.whatsapp}`,
+        ].join("\n"),
+      });
+      setSubmitted(data);
+      toast.success(tf.toast);
+    } catch {
+      toast.error("Erro ao enviar pedido. Tente novamente.");
+    }
   }
 
   return (

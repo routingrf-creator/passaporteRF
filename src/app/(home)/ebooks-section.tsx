@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, Download, Star, ArrowRight, Send, Mail } from "lucide-react";
 import { toast } from "sonner";
+import { sendEmail } from "@/lib/emailjs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -67,7 +68,7 @@ function EbookDialog({
   const [sending, setSending] = useState(false);
   const te = t.ebooks;
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSending(true);
 
@@ -76,17 +77,24 @@ function EbookDialog({
     const email = data.get("email") as string;
     const newsletter = data.get("newsletter") === "on";
 
-    const subject = encodeURIComponent(`E-book: ${ebook.title}`);
-    const body = encodeURIComponent(
-      `Oi Rafa & Fe!\n\nGostaria de receber o e-book "${ebook.title}".\n\nMeu email: ${email}\n${newsletter ? "Quero receber novidades e promocoes do PassaporteRF!" : ""}`
-    );
-
-    window.location.href = `mailto:passaporterf@gmail.com?subject=${subject}&body=${body}`;
-
-    setSending(false);
-    toast.success(te.toast);
-    setOpen(false);
-    form.reset();
+    try {
+      await sendEmail({
+        subject: `Pedido de E-book: ${ebook.title}`,
+        from_email: email,
+        body: [
+          `E-book: ${ebook.title}`,
+          `Email: ${email}`,
+          `Quer receber novidades: ${newsletter ? "Sim" : "Nao"}`,
+        ].join("\n"),
+      });
+      toast.success(te.toast);
+      setOpen(false);
+      form.reset();
+    } catch {
+      toast.error("Erro ao solicitar e-book. Tente novamente.");
+    } finally {
+      setSending(false);
+    }
   }
 
   return (

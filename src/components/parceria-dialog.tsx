@@ -5,6 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Send, Mail } from "lucide-react";
+import { sendEmail } from "@/lib/emailjs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -48,9 +49,25 @@ export function ParceriaDialog() {
     },
   });
 
-  function onSubmit(_data: MidiaKitFormData) {
-    toast.success(tp.toast);
-    reset();
+  async function onSubmit(data: MidiaKitFormData) {
+    try {
+      await sendEmail({
+        subject: `Nova proposta de parceria - ${data.nome}`,
+        from_email: data.email,
+        body: [
+          `Nome: ${data.nome}`,
+          `Email: ${data.email}`,
+          `Empresa: ${data.empresa || "(nao informada)"}`,
+          ``,
+          `Mensagem:`,
+          data.mensagem,
+        ].join("\n"),
+      });
+      toast.success(tp.toast);
+      reset();
+    } catch {
+      toast.error("Erro ao enviar proposta. Tente novamente.");
+    }
   }
 
   return (

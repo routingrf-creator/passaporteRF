@@ -5,6 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Send } from "lucide-react";
+import { sendEmail } from "@/lib/emailjs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -53,9 +54,25 @@ export function ContatoForm() {
     },
   });
 
-  function onSubmit(_data: ContatoFormData) {
-    toast.success(tc.toast);
-    reset();
+  async function onSubmit(data: ContatoFormData) {
+    try {
+      await sendEmail({
+        subject: `Novo contato - ${data.assunto}`,
+        from_email: data.email,
+        body: [
+          `Nome: ${data.nome}`,
+          `Email: ${data.email}`,
+          `Assunto: ${data.assunto}`,
+          ``,
+          `Mensagem:`,
+          data.mensagem,
+        ].join("\n"),
+      });
+      toast.success(tc.toast);
+      reset();
+    } catch {
+      toast.error("Erro ao enviar mensagem. Tente novamente.");
+    }
   }
 
   return (
@@ -135,7 +152,7 @@ export function ContatoForm() {
             className="w-full bg-passport-coral hover:bg-passport-coral/90 text-white"
           >
             <Send className="size-4" />
-            {tc.submit}
+            {isSubmitting ? "..." : tc.submit}
           </Button>
         </form>
       </CardContent>
