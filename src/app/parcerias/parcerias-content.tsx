@@ -43,12 +43,12 @@ const parceiros = [
   {
     nome: "Booking.com",
     href: "https://www.booking.com",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Booking.com_logo.svg/200px-Booking.com_logo.svg.png",
+    logo: "/booking.svg",
   },
   {
     nome: "Real Seguros Viagem",
     href: "https://www.seguroviagem.srv.br",
-    logo: "/real seguro.svg",
+    logo: "/real.webp",
   },
 ];
 
@@ -95,7 +95,7 @@ const afiliados = [
   {
     nome: "Omio",
     href: "https://omio.sjv.io/AggXQK",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Omio_Logo.svg/200px-Omio_Logo.svg.png",
+    logo: "/omio.png",
     codigo: null,
     beneficio: {
       pt: "Passagens de trem, ônibus e outros nas principais cidades do mundo",
@@ -317,7 +317,7 @@ export function ParceriasContent() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-60px" }}
-            className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
           >
             {tp.metricas.map((m, index) => {
               const Icon = metricaIcons[index] ?? Eye;
