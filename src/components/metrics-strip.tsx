@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { useT } from "@/contexts/language-context";
 
 const icons = [Eye, Heart, Users, Plane, Globe] as const;
-const metricValues = ["+3M", "+100mil", "+1.2M", "Italia", "22"] as const;
+const metricValues = ["+3M", "+100mil", "+1.2M", "Italia", "30+"] as const;
 const metricKeys = [
   "visualizacoes",
   "interacoes",

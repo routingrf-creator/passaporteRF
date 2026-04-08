@@ -26,14 +26,14 @@ export const metadata: Metadata = {
     template: "%s | PassaporteRF",
   },
   description:
-    "Rafa & Fe ajudam voce a viver viagens unicas com roteiros 100% personalizados. Descubra destinos incriveis, dicas praticas e experiencias autenticas.",
+    "Rafa e Fê ajudam voce a viver viagens unicas com roteiros 100% personalizados. Descubra destinos incriveis, dicas praticas e experiencias autenticas.",
   keywords: [
     "roteiros de viagem",
     "viagem personalizada",
     "travel influencer",
     "dicas de viagem",
     "PassaporteRF",
-    "Rafa e Fe",
+    "Rafa e Fê",
     "consultoria de viagem",
     "roteiro europa",
     "roteiro asia",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "PassaporteRF | Roteiros de Viagem Personalizados",
     description:
-      "Rafa & Fe ajudam voce a viver viagens unicas com roteiros 100% personalizados. Descubra destinos incriveis, dicas praticas e experiencias autenticas.",
+      "Rafa e Fê ajudam voce a viver viagens unicas com roteiros 100% personalizados. Descubra destinos incriveis, dicas praticas e experiencias autenticas.",
     url: "https://passaporterf.com",
     siteName: "PassaporteRF",
     images: [
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "PassaporteRF | Roteiros de Viagem Personalizados",
     description:
-      "Rafa & Fe ajudam voce a viver viagens unicas com roteiros 100% personalizados.",
+      "Rafa e Fê ajudam voce a viver viagens unicas com roteiros 100% personalizados.",
     images: ["/logo.png"],
   },
   robots: {

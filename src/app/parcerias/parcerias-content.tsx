@@ -23,6 +23,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/section-heading";
+import { YouTubeEmbed } from "@/components/youtube-embed";
 import { ParceriaDialog } from "@/components/parceria-dialog";
 import { useT } from "@/contexts/language-context";
 
@@ -32,7 +33,7 @@ const metricaIcons = [Eye, TrendingUp, Globe, Globe];
 const parceiros = [
   {
     nome: "GetYourGuide",
-    href: "https://www.getyourguide.com",
+    href: "https://gyg.me/passaporterf-app",
     logo: "https://cdn.getyourguide.com/tf/assets/static/logos/gyg-logo.svg",
   },
   {
@@ -43,11 +44,11 @@ const parceiros = [
   {
     nome: "Booking.com",
     href: "https://www.booking.com",
-    logo: "/booking.svg",
+    logo: "/booking-logo.jpeg",
   },
   {
     nome: "Real Seguros Viagem",
-    href: "https://www.seguroviagem.srv.br",
+    href: "https://www.seguroviagem.srv.br/?ag=Z4G1O7WFJL",
     logo: "/real.webp",
   },
 ];
@@ -254,6 +255,29 @@ export function ParceriasContent() {
                 </Card>
               </motion.div>
             ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Vídeo ──────────────────────────────────────────────── */}
+      <section className="py-16">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            title={tp.videoTitle}
+            subtitle={tp.videoSubtitle}
+            centered
+          />
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5 }}
+          >
+            <YouTubeEmbed
+              videoId="vtbf2eQ6ONo"
+              start={510}
+              title={tp.videoTitle}
+            />
           </motion.div>
         </div>
       </section>

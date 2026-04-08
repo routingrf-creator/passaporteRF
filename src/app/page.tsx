@@ -11,7 +11,7 @@ import { MetricsStrip } from "@/components/metrics-strip";
 export const metadata: Metadata = {
   title: "PassaporteRF | Roteiros de Viagem Personalizados",
   description:
-    "Rafa & Fe ajudam voce a viver viagens unicas com roteiros 100% personalizados. Descubra destinos incriveis, consultoria express e e-books de viagem.",
+    "Rafa e Fê ajudam voce a viver viagens unicas com roteiros 100% personalizados. Descubra destinos incriveis, consultoria express e e-books de viagem.",
 };
 
 export default function Home() {

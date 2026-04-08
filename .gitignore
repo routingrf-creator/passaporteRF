@@ -36,6 +36,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# Hero — vídeos-fonte (versões .mp4 otimizadas ficam versionadas)
+public/hero/*.mov
+public/hero/*.MOV
+
 # firebase
 .firebase/
 

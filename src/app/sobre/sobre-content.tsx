@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SectionHeading } from "@/components/section-heading";
+import { YouTubeEmbed } from "@/components/youtube-embed";
 import { useT } from "@/contexts/language-context";
 
 const valorIcons = [Heart, Gem, Sparkles];
@@ -48,6 +49,7 @@ export function SobreContent() {
   const t = useT();
   const ts = t.sobre;
 
+  const videoReveal = useReveal();
   const valoresReveal = useReveal();
   const timelineReveal = useReveal();
   const ctaReveal = useReveal();
@@ -114,7 +116,7 @@ export function SobreContent() {
               >
                 <Image
                   src="/about.jpg"
-                  alt="Rafa & Fe"
+                  alt="Rafa e Fê"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 90vw, 384px"
@@ -130,6 +132,35 @@ export function SobreContent() {
               </motion.div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* ── Vídeo ────────────────────────────────────────────────────── */}
+      <section className="bg-passport-cream/30 py-16" ref={videoReveal.ref}>
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate={videoReveal.inView ? "visible" : "hidden"}
+          >
+            <SectionHeading
+              title={ts.videoTitle}
+              subtitle={ts.videoSubtitle}
+              centered
+            />
+          </motion.div>
+          <motion.div
+            variants={fadeUp}
+            custom={1}
+            initial="hidden"
+            animate={videoReveal.inView ? "visible" : "hidden"}
+          >
+            <YouTubeEmbed
+              videoId="KXpMlyZT6x4"
+              start={6}
+              title={ts.videoTitle}
+            />
+          </motion.div>
         </div>
       </section>
 
