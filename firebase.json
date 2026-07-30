@@ -2,15 +2,10 @@
   "hosting": {
     "public": "out",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ],
+    "predeploy": ["npm run build"],
     "headers": [
       {
-        "source": "**/*.@(js|css|svg|png|jpg|jpeg|gif|webp|ico|woff|woff2)",
+        "source": "**/*.@(js|css|svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|mp4|webm)",
         "headers": [
           {
             "key": "Cache-Control",
