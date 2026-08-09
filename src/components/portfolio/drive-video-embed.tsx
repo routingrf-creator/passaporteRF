@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Pause, Play, Video, X } from "lucide-react";
+import { Maximize, Minimize, Pause, Play, Video, X } from "lucide-react";
 import type { PortfolioDriveVideoItem } from "@/content/portfolio";
 import { resolvePortfolioMedia } from "@/content/portfolio";
 import { usePortfolioPage } from "@/hooks/use-portfolio-page";
@@ -33,8 +33,10 @@ export function DriveVideoEmbed({
   onStop,
 }: DriveVideoEmbedProps) {
   const { driveVideo } = usePortfolioPage();
+  const playerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [loadError, setLoadError] = useState(false);
@@ -43,6 +45,21 @@ export function DriveVideoEmbed({
   const videoSrc = item.video ? resolvePortfolioMedia(item.video) : null;
   const isValid = Boolean(parseGoogleDriveFileId(item.url));
   const videoTitle = `${item.title} — ${item.subtitle}`;
+
+  useEffect(() => {
+    const onFullscreenChange = () => {
+      setIsFullscreen(document.fullscreenElement === playerRef.current);
+    };
+
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+    return () => document.removeEventListener("fullscreenchange", onFullscreenChange);
+  }, []);
+
+  useEffect(() => {
+    if (!isActive && document.fullscreenElement === playerRef.current) {
+      void document.exitFullscreen();
+    }
+  }, [isActive]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -100,6 +117,34 @@ export function DriveVideoEmbed({
     [duration]
   );
 
+  const toggleFullscreen = useCallback(async () => {
+    const player = playerRef.current;
+    const video = videoRef.current;
+    if (!player || !video) return;
+
+    try {
+      if (document.fullscreenElement === player) {
+        await document.exitFullscreen();
+        return;
+      }
+
+      const webkitVideo = video as HTMLVideoElement & {
+        webkitEnterFullscreen?: () => void;
+      };
+
+      if (typeof webkitVideo.webkitEnterFullscreen === "function") {
+        webkitVideo.webkitEnterFullscreen();
+        return;
+      }
+
+      if (player.requestFullscreen) {
+        await player.requestFullscreen();
+      }
+    } catch {
+      // Ignore unsupported fullscreen requests.
+    }
+  }, []);
+
   if (!isValid) {
     return (
       <div
@@ -112,7 +157,8 @@ export function DriveVideoEmbed({
 
   return (
     <div
-      className={`relative aspect-[4/5] overflow-hidden bg-[#1a1a1a] ${className ?? ""}`}
+      ref={playerRef}
+      className={`portfolio-video-player relative aspect-[4/5] overflow-hidden bg-[#1a1a1a] ${className ?? ""}`}
     >
       {isActive ? (
         <>
@@ -179,6 +225,23 @@ export function DriveVideoEmbed({
                   <span className="w-10 shrink-0 text-right text-[10px] font-medium tracking-wide text-white/80 tabular-nums">
                     {formatTime(currentTime)}
                   </span>
+
+                  <button
+                    type="button"
+                    onClick={() => void toggleFullscreen()}
+                    className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-colors hover:bg-white/25"
+                    aria-label={
+                      isFullscreen
+                        ? driveVideo.exitFullscreen
+                        : driveVideo.fullscreen
+                    }
+                  >
+                    {isFullscreen ? (
+                      <Minimize className="size-4" />
+                    ) : (
+                      <Maximize className="size-4" />
+                    )}
+                  </button>
                 </div>
               </div>
 
