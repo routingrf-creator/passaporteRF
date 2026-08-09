@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/flatten-static-rsc.mjs",
     "start": "next start",
     "lint": "eslint",
     "compress:videos": "node scripts/compress-portfolio-videos.mjs",

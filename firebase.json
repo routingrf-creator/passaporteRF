@@ -5,7 +5,7 @@
     "predeploy": ["npm run build"],
     "headers": [
       {
-        "source": "**/*.@(js|css|svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|mp4|webm)",
+        "source": "**/*.@(js|css|svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|mp4|webm|txt)",
         "headers": [
           {
             "key": "Cache-Control",

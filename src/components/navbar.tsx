@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { SiteLink } from "@/components/site-link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
@@ -72,7 +72,7 @@ export function Navbar() {
         aria-label={t.nav.destinos}
       >
         {/* Logo */}
-        <Link
+        <SiteLink
           href="/"
           className="group flex items-center gap-2"
           aria-label="PassaporteRF"
@@ -85,7 +85,7 @@ export function Navbar() {
             className="h-9 w-auto transition-transform duration-300 group-hover:scale-105"
             priority
           />
-        </Link>
+        </SiteLink>
 
         {/* Desktop nav */}
         <ul className="hidden items-center gap-1 lg:flex">
@@ -96,7 +96,7 @@ export function Navbar() {
                 : pathname.startsWith(link.href);
             return (
               <li key={link.href}>
-                <Link
+                <SiteLink
                   href={link.href}
                   className={`relative rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                     isActive
@@ -113,7 +113,7 @@ export function Navbar() {
                       transition={{ type: "spring", stiffness: 380, damping: 28 }}
                     />
                   )}
-                </Link>
+                </SiteLink>
               </li>
             );
           })}
@@ -150,7 +150,7 @@ export function Navbar() {
               asChild
               className="bg-passport-coral text-white shadow-sm transition-colors duration-200 hover:bg-passport-coral/90 hover:shadow-md"
             >
-              <Link href="/roteiros">{t.nav.criarRoteiro}</Link>
+              <SiteLink href="/roteiros">{t.nav.criarRoteiro}</SiteLink>
             </Button>
           </motion.div>
         </div>
@@ -199,7 +199,7 @@ export function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.05 * i, duration: 0.25 }}
                   >
-                    <Link
+                    <SiteLink
                       href={link.href}
                       onClick={() => setOpen(false)}
                       className={`flex items-center justify-between rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
@@ -212,7 +212,7 @@ export function Navbar() {
                       {isActive && (
                         <span className="size-1.5 rounded-full bg-passport-coral" />
                       )}
-                    </Link>
+                    </SiteLink>
                   </motion.div>
                 );
               })}
@@ -247,9 +247,9 @@ export function Navbar() {
                     asChild
                     className="w-full bg-passport-coral text-white hover:bg-passport-coral/90"
                   >
-                    <Link href="/roteiros" onClick={() => setOpen(false)}>
+                    <SiteLink href="/roteiros" onClick={() => setOpen(false)}>
                       {t.nav.criarRoteiro}
-                    </Link>
+                    </SiteLink>
                   </Button>
                 </motion.div>
               </div>
