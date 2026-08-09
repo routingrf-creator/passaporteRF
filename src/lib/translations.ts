@@ -1,4 +1,11 @@
 import type { Locale } from "@/contexts/language-context";
+import {
+  portfolioPageDe,
+  portfolioPageEn,
+  portfolioPageEs,
+  portfolioPageFr,
+  portfolioPagePt,
+} from "@/lib/portfolio-page-translations";
 
 type DeepStringShape<T> =
   T extends string ? string :
@@ -14,6 +21,7 @@ const pt = {
       destinos: "Destinos",
       roteiros: "Roteiros",
       sobre: "Sobre",
+      portfolio: "Portfólio",
       parcerias: "Parcerias",
       contato: "Contato",
       criarRoteiro: "Criar meu roteiro",
@@ -358,6 +366,7 @@ const pt = {
         { valor: "Alcance", label: "Brasil, EUA, Europa" },
       ],
     },
+    portfolio: portfolioPagePt,
     roteiroForm: {
       title: "Preencha seus dados",
       destino: "Destino",
@@ -444,6 +453,7 @@ const pt = {
       destinos: "Destinations",
       roteiros: "Itineraries",
       sobre: "About",
+      portfolio: "Portfolio",
       parcerias: "Partnerships",
       contato: "Contact",
       criarRoteiro: "Create my itinerary",
@@ -788,6 +798,7 @@ const pt = {
         { valor: "Reach", label: "Brazil, USA, Europe" },
       ],
     },
+    portfolio: portfolioPageEn,
     roteiroForm: {
       title: "Fill in your details",
       destino: "Destination",
@@ -870,6 +881,7 @@ const pt = {
       destinos: "Destinos",
       roteiros: "Itinerarios",
       sobre: "Sobre nosotros",
+      portfolio: "Portafolio",
       parcerias: "Asociaciones",
       contato: "Contacto",
       criarRoteiro: "Crear mi itinerario",
@@ -1214,6 +1226,7 @@ const pt = {
         { valor: "Alcance", label: "Brasil, EE.UU., Europa" },
       ],
     },
+    portfolio: portfolioPageEs,
     roteiroForm: {
       title: "Completa tus datos",
       destino: "Destino",
@@ -1300,6 +1313,7 @@ const pt = {
       destinos: "Destinations",
       roteiros: "Itinéraires",
       sobre: "À propos",
+      portfolio: "Portfolio",
       parcerias: "Partenariats",
       contato: "Contact",
       criarRoteiro: "Créer mon itinéraire",
@@ -1617,6 +1631,7 @@ const pt = {
         { valor: "Portée", label: "Brésil, USA, Europe" },
       ],
     },
+    portfolio: portfolioPageFr,
     roteiroForm: {
       title: "Remplissez vos coordonnées",
       destino: "Destination",
@@ -1698,6 +1713,7 @@ const pt = {
       destinos: "Reiseziele",
       roteiros: "Reisepläne",
       sobre: "Über uns",
+      portfolio: "Portfolio",
       parcerias: "Partnerschaften",
       contato: "Kontakt",
       criarRoteiro: "Meinen Reiseplan erstellen",
@@ -2014,6 +2030,7 @@ const pt = {
         { valor: "Reichweite", label: "Brasilien, USA, Europa" },
       ],
     },
+    portfolio: portfolioPageDe,
     roteiroForm: {
       title: "Ihre Daten eingeben",
       destino: "Reiseziel",

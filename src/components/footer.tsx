@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   Instagram,
@@ -30,11 +31,17 @@ const colAnim = {
 
 export function Footer() {
   const t = useT();
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/portfolio")) {
+    return null;
+  }
 
   const siteLinks = [
     { label: t.nav.destinos, href: "/destinos" },
     { label: t.nav.roteiros, href: "/roteiros" },
     { label: t.nav.sobre, href: "/sobre" },
+    { label: t.nav.portfolio, href: "/portfolio" },
     { label: t.nav.parcerias, href: "/parcerias" },
     { label: t.nav.contato, href: "/contato" },
   ] as const;

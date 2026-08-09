@@ -21,6 +21,7 @@ const navHrefs = [
   "/destinos",
   "/roteiros",
   "/sobre",
+  "/portfolio",
   "/parcerias",
   "/contato",
 ] as const;
@@ -53,6 +54,7 @@ export function Navbar() {
     { label: t.nav.destinos, href: "/destinos" },
     { label: t.nav.roteiros, href: "/roteiros" },
     { label: t.nav.sobre, href: "/sobre" },
+    { label: t.nav.portfolio, href: "/portfolio" },
     { label: t.nav.parcerias, href: "/parcerias" },
     { label: t.nav.contato, href: "/contato" },
   ] as const;

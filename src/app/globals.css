@@ -118,3 +118,21 @@ html {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
+html.portfolio-page {
+  scroll-snap-type: y proximity;
+  background: #ebe8e1;
+}
+
+html.portfolio-page main {
+  background: #ebe8e1;
+}
+
+html.portfolio-page .portfolio-editorial > section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+html.portfolio-page .portfolio-editorial {
+  color: #8a7b58;
+}
+
