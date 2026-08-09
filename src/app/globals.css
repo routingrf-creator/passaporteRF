@@ -136,27 +136,21 @@ html.portfolio-page .portfolio-editorial {
   color: #8a7b58;
 }
 
-/* Google Drive preview player overlaps its own controls in narrow inline cards on mobile.
-   Scale the iframe up and clip overflow so the video fills the slot cleanly. */
-.portfolio-drive-player__viewport {
-  overflow: hidden;
-}
-
-.portfolio-drive-player__iframe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
+.portfolio-video-scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background: #ebe8e1;
   border: 0;
-  transform: translate(-50%, -50%);
 }
 
-@media (max-width: 767px) {
-  .portfolio-drive-player__iframe {
-    width: 340%;
-    height: 340%;
-    transform: translate(-50%, -58%);
-  }
+.portfolio-video-scrubber::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background: #ebe8e1;
+  border: 0;
 }
 
