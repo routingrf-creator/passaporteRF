@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { SiteLink } from "@/components/site-link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -63,10 +63,10 @@ export function TrendingDestinations() {
             size="lg"
             className="group transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
           >
-            <Link href="/destinos">
+            <SiteLink href="/destinos">
               {t.trendingDestinations.verTodos}
               <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
+            </SiteLink>
           </Button>
         </motion.div>
       </div>

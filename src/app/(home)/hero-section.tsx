@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { SiteLink } from "@/components/site-link";
 import { motion } from "framer-motion";
 import { Compass, Map } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -114,17 +114,17 @@ export function HeroSection() {
                 size="lg"
                 className="pointer-events-auto w-full border-white/40 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 hover:text-white sm:w-auto"
               >
-                <Link href="/destinos">
+                <SiteLink href="/destinos">
                   <Map className="size-4" />
                   {t.hero.explorar}
-                </Link>
+                </SiteLink>
               </Button>
               <Button
                 asChild
                 size="lg"
                 className="pointer-events-auto w-full bg-passport-coral text-white shadow-lg hover:bg-passport-coral/90 sm:w-auto"
               >
-                <Link href="/roteiros">{t.hero.criar}</Link>
+                <SiteLink href="/roteiros">{t.hero.criar}</SiteLink>
               </Button>
             </motion.div>
           </motion.div>

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { SiteLink } from "@/components/site-link";
 import { ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -18,7 +18,7 @@ export function DestinationCard({ destination, className }: DestinationCardProps
   const t = useT();
 
   return (
-    <Link
+    <SiteLink
       href={`/destinos/${slug}`}
       className={cn(
         "group flex flex-col overflow-hidden rounded-3xl border border-white/40 bg-white/50 text-card-foreground shadow-[0_8px_32px_rgba(0,0,0,0.06)] backdrop-blur-xl transition-all duration-500 hover:scale-[1.02] hover:border-white/60 hover:bg-white/65 hover:shadow-[0_16px_48px_rgba(30,111,175,0.12)]",
@@ -68,6 +68,6 @@ export function DestinationCard({ destination, className }: DestinationCardProps
           <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
         </span>
       </div>
-    </Link>
+    </SiteLink>
   );
 }

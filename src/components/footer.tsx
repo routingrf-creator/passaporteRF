@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { SiteLink } from "@/components/site-link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
@@ -58,7 +58,7 @@ export function Footer() {
         >
           {/* Brand */}
           <motion.div variants={colAnim} className="sm:col-span-2 lg:col-span-1">
-            <Link
+            <SiteLink
               href="/"
               className="group inline-block"
               aria-label="PassaporteRF"
@@ -70,7 +70,7 @@ export function Footer() {
                 height={40}
                 className="h-10 w-auto transition-transform duration-300 group-hover:scale-105"
               />
-            </Link>
+            </SiteLink>
             <p className="mt-3 text-sm leading-relaxed text-white/70">
               {t.footer.desc}
             </p>
@@ -88,12 +88,12 @@ export function Footer() {
                     whileHover={{ x: 4 }}
                     transition={{ type: "spring", stiffness: 380, damping: 22 }}
                   >
-                    <Link
+                    <SiteLink
                       href={link.href}
                       className="text-sm text-white/70 transition-colors duration-200 hover:text-white"
                     >
                       {link.label}
-                    </Link>
+                    </SiteLink>
                   </motion.div>
                 </li>
               ))}

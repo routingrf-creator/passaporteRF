@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { SiteLink } from "@/components/site-link";
 import { Heart, Gem, Sparkles, Plane, ArrowRight } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
@@ -324,7 +324,7 @@ export function SobreContent() {
                 size="lg"
                 className="bg-white text-passport-coral hover:bg-white/90"
               >
-                <Link href="/roteiros">
+                <SiteLink href="/roteiros">
                   {ts.ctaButton}
                   <motion.span
                     className="inline-flex"
@@ -333,7 +333,7 @@ export function SobreContent() {
                   >
                     <ArrowRight className="size-4" />
                   </motion.span>
-                </Link>
+                </SiteLink>
               </Button>
             </motion.div>
           </motion.div>

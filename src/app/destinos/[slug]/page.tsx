@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { SiteLink } from "@/components/site-link";
 import { notFound } from "next/navigation";
 import {
   Calendar,
@@ -99,10 +99,10 @@ export default async function DestinoPage({
             variant="ghost"
             className="text-white hover:bg-white/20 hover:text-white"
           >
-            <Link href="/destinos">
+            <SiteLink href="/destinos">
               <ArrowLeft className="size-4" />
               Voltar
-            </Link>
+            </SiteLink>
           </Button>
         </div>
 
@@ -224,7 +224,7 @@ export default async function DestinoPage({
             size="lg"
             className="mt-8 bg-passport-coral hover:bg-passport-coral/90 text-white text-base px-8"
           >
-            <Link href="/roteiros">Quero meu roteiro</Link>
+            <SiteLink href="/roteiros">Quero meu roteiro</SiteLink>
           </Button>
         </div>
       </section>
