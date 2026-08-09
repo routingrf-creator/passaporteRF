@@ -152,6 +152,7 @@ export const portfolioPagePt = {
     timeline: "Linha do tempo do vídeo",
     fullscreen: "Tela cheia",
     exitFullscreen: "Sair da tela cheia",
+    loading: "Carregando vídeo",
     loadError: "Não foi possível carregar o vídeo. Verifique o arquivo MP4.",
     missingFile:
       "Arquivo de vídeo não encontrado. Adicione o MP4 em public/portfolio/videos/.",
@@ -313,6 +314,7 @@ export const portfolioPageEn = {
     timeline: "Video timeline",
     fullscreen: "Full screen",
     exitFullscreen: "Exit full screen",
+    loading: "Loading video",
     loadError: "Could not load the video. Check the MP4 file.",
     missingFile:
       "Video file not found. Add the MP4 under public/portfolio/videos/.",
@@ -474,6 +476,7 @@ export const portfolioPageEs = {
     timeline: "Línea de tiempo del video",
     fullscreen: "Pantalla completa",
     exitFullscreen: "Salir de pantalla completa",
+    loading: "Cargando video",
     loadError: "No se pudo cargar el video. Verifica el archivo MP4.",
     missingFile:
       "Archivo de video no encontrado. Añade el MP4 en public/portfolio/videos/.",
@@ -635,6 +638,7 @@ export const portfolioPageFr = {
     timeline: "Timeline de la vidéo",
     fullscreen: "Plein écran",
     exitFullscreen: "Quitter le plein écran",
+    loading: "Chargement de la vidéo",
     loadError: "Impossible de charger la vidéo. Vérifiez le fichier MP4.",
     missingFile:
       "Fichier vidéo introuvable. Ajoutez le MP4 dans public/portfolio/videos/.",
@@ -796,6 +800,7 @@ export const portfolioPageDe = {
     timeline: "Video-Timeline",
     fullscreen: "Vollbild",
     exitFullscreen: "Vollbild beenden",
+    loading: "Video wird geladen",
     loadError: "Video konnte nicht geladen werden. MP4-Datei prüfen.",
     missingFile:
       "Videodatei nicht gefunden. MP4 unter public/portfolio/videos/ hinzufügen.",

@@ -1,11 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Maximize, Minimize, Pause, Play, Video, X } from "lucide-react";
+import { Loader2, Maximize, Minimize, Pause, Play, Video, X } from "lucide-react";
 import type { PortfolioDriveVideoItem } from "@/content/portfolio";
 import { resolvePortfolioMedia } from "@/content/portfolio";
 import { usePortfolioPage } from "@/hooks/use-portfolio-page";
 import { parseGoogleDriveFileId } from "@/lib/google-drive-embed";
+import {
+  playWhenReady,
+  prefetchPortfolioVideo,
+} from "@/lib/portfolio-video-prefetch";
 
 type DriveVideoEmbedProps = {
   item: PortfolioDriveVideoItem;
@@ -34,9 +38,11 @@ export function DriveVideoEmbed({
 }: DriveVideoEmbedProps) {
   const { driveVideo } = usePortfolioPage();
   const playerRef = useRef<HTMLDivElement>(null);
+  const posterRef = useRef<HTMLButtonElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [loadError, setLoadError] = useState(false);
@@ -45,6 +51,10 @@ export function DriveVideoEmbed({
   const videoSrc = item.video ? resolvePortfolioMedia(item.video) : null;
   const isValid = Boolean(parseGoogleDriveFileId(item.url));
   const videoTitle = `${item.title} — ${item.subtitle}`;
+
+  const prefetchVideo = useCallback(() => {
+    if (videoSrc) prefetchPortfolioVideo(videoSrc);
+  }, [videoSrc]);
 
   useEffect(() => {
     const onFullscreenChange = () => {
@@ -62,36 +72,57 @@ export function DriveVideoEmbed({
   }, [isActive]);
 
   useEffect(() => {
+    if (isActive || !videoSrc) return;
+
+    const posterButton = posterRef.current;
+    if (!posterButton) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) prefetchVideo();
+      },
+      { rootMargin: "120px", threshold: 0.2 }
+    );
+
+    observer.observe(posterButton);
+    return () => observer.disconnect();
+  }, [isActive, videoSrc, prefetchVideo]);
+
+  useEffect(() => {
+    if (priority && videoSrc) prefetchVideo();
+  }, [priority, videoSrc, prefetchVideo]);
+
+  useEffect(() => {
     const video = videoRef.current;
-    if (!video || !isActive) return;
+    if (!video || !isActive || !videoSrc) return;
+
+    let cancelled = false;
 
     setLoadError(false);
     setCurrentTime(0);
     setDuration(0);
     setIsPlaying(false);
-    video.load();
-  }, [isActive, videoSrc]);
+    setIsLoading(true);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    void playWhenReady(video)
+      .then(() => {
+        if (!cancelled) {
+          setIsPlaying(true);
+          setIsLoading(false);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setIsPlaying(false);
+          setIsLoading(false);
+          setLoadError(true);
+        }
+      });
 
-    if (!isActive) {
+    return () => {
+      cancelled = true;
       video.pause();
-      video.currentTime = 0;
-      setIsPlaying(false);
-      setCurrentTime(0);
-      return;
-    }
-
-    if (!videoSrc) return;
-
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => setIsPlaying(true))
-        .catch(() => setIsPlaying(false));
-    }
+    };
   }, [isActive, videoSrc]);
 
   const togglePlayback = useCallback(() => {
@@ -99,7 +130,16 @@ export function DriveVideoEmbed({
     if (!video) return;
 
     if (video.paused) {
-      void video.play().then(() => setIsPlaying(true));
+      setIsLoading(true);
+      void playWhenReady(video)
+        .then(() => {
+          setIsPlaying(true);
+          setIsLoading(false);
+        })
+        .catch(() => {
+          setIsPlaying(false);
+          setIsLoading(false);
+        });
     } else {
       video.pause();
       setIsPlaying(false);
@@ -169,7 +209,7 @@ export function DriveVideoEmbed({
                 src={videoSrc}
                 poster={poster}
                 playsInline
-                preload="metadata"
+                preload="auto"
                 className="absolute inset-0 h-full w-full object-contain"
                 onClick={togglePlayback}
                 onLoadedMetadata={(event) => {
@@ -181,9 +221,28 @@ export function DriveVideoEmbed({
                 }}
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
+                onWaiting={() => setIsLoading(true)}
+                onPlaying={() => setIsLoading(false)}
+                onCanPlay={() => setIsLoading(false)}
                 onEnded={() => setIsPlaying(false)}
-                onError={() => setLoadError(true)}
+                onError={() => {
+                  setIsLoading(false);
+                  setLoadError(true);
+                }}
               />
+
+              {isLoading && !loadError ? (
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/45 p-6 text-center">
+                  <Loader2
+                    className="size-8 animate-spin text-white/90"
+                    strokeWidth={1.75}
+                    aria-hidden
+                  />
+                  <p className="text-xs font-medium tracking-[0.14em] text-white/80 uppercase">
+                    {driveVideo.loading}
+                  </p>
+                </div>
+              ) : null}
 
               <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent pt-10 pb-3">
                 <div className="pointer-events-auto flex items-center gap-3 px-3">
@@ -268,8 +327,11 @@ export function DriveVideoEmbed({
         </>
       ) : (
         <button
+          ref={posterRef}
           type="button"
           onClick={onPlay}
+          onPointerEnter={prefetchVideo}
+          onFocus={prefetchVideo}
           className="group relative h-full w-full cursor-pointer"
           aria-label={`${driveVideo.play} — ${item.title}`}
         >
