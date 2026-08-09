@@ -30,7 +30,12 @@ const midiaKitSchema = z.object({
 
 type MidiaKitFormData = z.infer<typeof midiaKitSchema>;
 
-export function ParceriaDialog() {
+type ParceriaDialogProps = {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+};
+
+export function ParceriaDialog({ open, onOpenChange }: ParceriaDialogProps) {
   const t = useT();
   const tp = t.parceriaDialog;
 
@@ -71,7 +76,7 @@ export function ParceriaDialog() {
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
         <Button
           size="lg"
