@@ -147,7 +147,14 @@ export const portfolioPagePt = {
     invalidLink:
       "Link do Google Drive inválido. Atualize url em src/content/portfolio.ts.",
     play: "Reproduzir vídeo",
+    pause: "Pausar vídeo",
     close: "Fechar vídeo",
+    timeline: "Linha do tempo do vídeo",
+    fullscreen: "Tela cheia",
+    exitFullscreen: "Sair da tela cheia",
+    loadError: "Não foi possível carregar o vídeo. Verifique o arquivo MP4.",
+    missingFile:
+      "Arquivo de vídeo não encontrado. Adicione o MP4 em public/portfolio/videos/.",
   },
   mediaKitDownload: "Baixar Media Kit",
 } as const;
@@ -301,7 +308,14 @@ export const portfolioPageEn = {
     invalidLink:
       "Invalid Google Drive link. Update url in src/content/portfolio.ts.",
     play: "Play video",
+    pause: "Pause video",
     close: "Close video",
+    timeline: "Video timeline",
+    fullscreen: "Full screen",
+    exitFullscreen: "Exit full screen",
+    loadError: "Could not load the video. Check the MP4 file.",
+    missingFile:
+      "Video file not found. Add the MP4 under public/portfolio/videos/.",
   },
   mediaKitDownload: "Download Media Kit",
 } as const;
@@ -455,7 +469,14 @@ export const portfolioPageEs = {
     invalidLink:
       "Enlace de Google Drive no válido. Actualiza url en src/content/portfolio.ts.",
     play: "Reproducir video",
+    pause: "Pausar video",
     close: "Cerrar video",
+    timeline: "Línea de tiempo del video",
+    fullscreen: "Pantalla completa",
+    exitFullscreen: "Salir de pantalla completa",
+    loadError: "No se pudo cargar el video. Verifica el archivo MP4.",
+    missingFile:
+      "Archivo de video no encontrado. Añade el MP4 en public/portfolio/videos/.",
   },
   mediaKitDownload: "Descargar Media Kit",
 } as const;
@@ -609,7 +630,14 @@ export const portfolioPageFr = {
     invalidLink:
       "Lien Google Drive invalide. Mettez à jour url dans src/content/portfolio.ts.",
     play: "Lire la vidéo",
+    pause: "Mettre en pause",
     close: "Fermer la vidéo",
+    timeline: "Timeline de la vidéo",
+    fullscreen: "Plein écran",
+    exitFullscreen: "Quitter le plein écran",
+    loadError: "Impossible de charger la vidéo. Vérifiez le fichier MP4.",
+    missingFile:
+      "Fichier vidéo introuvable. Ajoutez le MP4 dans public/portfolio/videos/.",
   },
   mediaKitDownload: "Télécharger le Media Kit",
 } as const;
@@ -763,7 +791,14 @@ export const portfolioPageDe = {
     invalidLink:
       "Ungültiger Google-Drive-Link. Aktualisieren Sie url in src/content/portfolio.ts.",
     play: "Video abspielen",
+    pause: "Video pausieren",
     close: "Video schließen",
+    timeline: "Video-Timeline",
+    fullscreen: "Vollbild",
+    exitFullscreen: "Vollbild beenden",
+    loadError: "Video konnte nicht geladen werden. MP4-Datei prüfen.",
+    missingFile:
+      "Videodatei nicht gefunden. MP4 unter public/portfolio/videos/ hinzufügen.",
   },
   mediaKitDownload: "Media Kit herunterladen",
 } as const;

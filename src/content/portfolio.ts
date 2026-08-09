@@ -3,11 +3,13 @@
  * Media paths are relative to /public (e.g. "/portfolio/assets/lifestyle/prada.jpg").
  */
 
-/** Click-to-play Google Drive video embed for Lifestyle / Travel galleries */
+/** Click-to-play video for Lifestyle / Travel galleries */
 export type PortfolioDriveVideoItem = {
   type: "drive";
-  /** Google Drive share link or file ID */
+  /** Google Drive share link or file ID (reference / backup) */
   url: string;
+  /** Self-hosted MP4 under /public — used for inline playback with custom controls */
+  video: string;
   title: string;
   subtitle: string;
   category: string;
@@ -109,13 +111,14 @@ export const servicesContent = {
 } as const;
 
 /**
- * Lifestyle gallery — set url to a Google Drive video share link.
- * Share the file as "Anyone with the link" in Google Drive.
+ * Lifestyle gallery — add matching MP4 files under public/portfolio/videos/lifestyle/.
+ * Google Drive links are kept as reference; playback uses the local video path.
  */
 export const lifestylePortfolio: PortfolioDriveVideoItem[] = [
   {
     type: "drive",
     url: "https://drive.google.com/file/d/1Qf2gtenj8Vrbyu2k-EY1MjbCgsFFgi0x/view?usp=sharing",
+    video: "/portfolio/videos/lifestyle/prada.mp4",
     title: "Prada",
     subtitle: "Unboxing",
     category: "FASHION",
@@ -124,6 +127,7 @@ export const lifestylePortfolio: PortfolioDriveVideoItem[] = [
   {
     type: "drive",
     url: "https://drive.google.com/file/d/1lpw0nrHSc35P-GRjC8fC5Uj28-T9YkYJ/view?usp=sharing",
+    video: "/portfolio/videos/lifestyle/rituals.mp4",
     title: "Rituals",
     subtitle: "Product Review",
     category: "BEAUTY",
@@ -132,6 +136,7 @@ export const lifestylePortfolio: PortfolioDriveVideoItem[] = [
   {
     type: "drive",
     url: "https://drive.google.com/file/d/1PvyazwDdSbAbddaLRsAiigFC_4FpPiKM/view?usp=sharing",
+    video: "/portfolio/videos/lifestyle/dji-osmo.mp4",
     title: "DJI Osmo",
     subtitle: "Unboxing",
     category: "TECH",
@@ -140,6 +145,7 @@ export const lifestylePortfolio: PortfolioDriveVideoItem[] = [
   {
     type: "drive",
     url: "https://drive.google.com/file/d/1rNFb-01L_cUrw7JT8Ohd5hSdwSVvY4ds/view?usp=sharing",
+    video: "/portfolio/videos/lifestyle/kiko-milano.mp4",
     title: "Kiko Milano",
     subtitle: "Problem/Solution",
     category: "BEAUTY",
@@ -148,12 +154,13 @@ export const lifestylePortfolio: PortfolioDriveVideoItem[] = [
 ];
 
 /**
- * Travel gallery — set url to a Google Drive video share link.
+ * Travel gallery — add matching MP4 files under public/portfolio/videos/travel/.
  */
 export const travelPortfolio: PortfolioDriveVideoItem[] = [
   {
     type: "drive",
     url: "https://drive.google.com/file/d/1CdnaVPV6vAhq65PPvw4QXgXnexyw8OFn/view?usp=sharing",
+    video: "/portfolio/videos/travel/royal-caribbean.mp4",
     title: "Royal Caribbean",
     subtitle: "Experience Storytelling",
     category: "CRUISE",
@@ -162,6 +169,7 @@ export const travelPortfolio: PortfolioDriveVideoItem[] = [
   {
     type: "drive",
     url: "https://drive.google.com/file/d/1N2RJTeyjouzr91xMzPxU4zDMx4jDWvr1/view?usp=sharing",
+    video: "/portfolio/videos/travel/primark.mp4",
     title: "Primark",
     subtitle: "Testimonial Video Content",
     category: "LUGGAGE",
@@ -170,6 +178,7 @@ export const travelPortfolio: PortfolioDriveVideoItem[] = [
   {
     type: "drive",
     url: "https://drive.google.com/file/d/1cOLJjMS1gtjTFzpoSXc4C8eSFuVcUEcc/view?usp=sharing",
+    video: "/portfolio/videos/travel/acropolis.mp4",
     title: "Acropolis",
     subtitle: "Voiceover Storytelling",
     category: "EXPERIENCE",
@@ -178,6 +187,7 @@ export const travelPortfolio: PortfolioDriveVideoItem[] = [
   {
     type: "drive",
     url: "https://drive.google.com/file/d/16zG-wF2Liwd7a2vkH-qQGGtNsL0eJppg/view?usp=sharing",
+    video: "/portfolio/videos/travel/finn-lough.mp4",
     title: "Finn Lough",
     subtitle: "Experience Storytelling",
     category: "HOTEL",

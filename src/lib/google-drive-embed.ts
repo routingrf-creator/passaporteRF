@@ -35,6 +35,7 @@ export function getGoogleDrivePreviewUrl(
 
   const params = new URLSearchParams();
   if (autoplay) params.set("autoplay", "1");
+  params.set("embedded", "true");
   const query = params.toString();
 
   return `https://drive.google.com/file/d/${fileId}/preview${
