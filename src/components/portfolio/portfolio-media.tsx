@@ -5,7 +5,7 @@ import type { PortfolioGalleryItem } from "@/content/portfolio";
 import { resolvePortfolioMedia } from "@/content/portfolio";
 
 type PortfolioMediaProps = {
-  item: Exclude<PortfolioGalleryItem, { type: "drive" }>;
+  item: Exclude<PortfolioGalleryItem, { type: "youtube" }>;
   className?: string;
   priority?: boolean;
   grayscale?: boolean;

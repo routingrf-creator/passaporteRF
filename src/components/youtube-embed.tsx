@@ -1,3 +1,5 @@
+import { PrivacyEmbedIframe } from "@/components/privacy-embed-iframe";
+
 type YouTubeEmbedProps = {
   videoId: string;
   /** Segundos para iniciar a reprodução (equivalente a `t=` na URL do YouTube). */
@@ -12,14 +14,13 @@ export function YouTubeEmbed({ videoId, start, title }: YouTubeEmbedProps) {
 
   return (
     <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-passport-blue/10 bg-black shadow-lg">
-      <iframe
+      <PrivacyEmbedIframe
         className="absolute inset-0 h-full w-full"
         src={src}
         title={title}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
         loading="lazy"
-        referrerPolicy="strict-origin-when-cross-origin"
       />
     </div>
   );

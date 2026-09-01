@@ -3,13 +3,11 @@
  * Media paths are relative to /public (e.g. "/portfolio/assets/lifestyle/prada.jpg").
  */
 
-/** Click-to-play video for Lifestyle / Travel galleries */
-export type PortfolioDriveVideoItem = {
-  type: "drive";
-  /** Google Drive share link or file ID (reference / backup) */
+/** Click-to-play video for Lifestyle / Travel galleries (YouTube Shorts URL) */
+export type PortfolioYoutubeVideoItem = {
+  type: "youtube";
+  /** Public YouTube Shorts link (e.g. https://youtube.com/shorts/VIDEO_ID) */
   url: string;
-  /** Self-hosted MP4 under /public — used for inline playback with custom controls */
-  video: string;
   title: string;
   subtitle: string;
   category: string;
@@ -38,7 +36,7 @@ export type PortfolioFileVideoItem = {
 };
 
 export type PortfolioGalleryItem =
-  | PortfolioDriveVideoItem
+  | PortfolioYoutubeVideoItem
   | PortfolioImageItem
   | PortfolioFileVideoItem;
 
@@ -46,10 +44,10 @@ export type PhotosPortfolioItem = PortfolioImageItem & {
   gridSlot: "left" | "mid-top-left" | "mid-top-right" | "mid-bottom" | "right";
 };
 
-export function isDriveVideoItem(
+export function isYoutubeVideoItem(
   item: PortfolioGalleryItem
-): item is PortfolioDriveVideoItem {
-  return item.type === "drive";
+): item is PortfolioYoutubeVideoItem {
+  return item.type === "youtube";
 }
 
 export const portfolioAssets = {
@@ -111,41 +109,36 @@ export const servicesContent = {
 } as const;
 
 /**
- * Lifestyle gallery — add matching MP4 files under public/portfolio/videos/lifestyle/.
- * Google Drive links are kept as reference; playback uses the local video path.
+ * Lifestyle gallery — set `url` to a public YouTube Shorts link.
  */
-export const lifestylePortfolio: PortfolioDriveVideoItem[] = [
+export const lifestylePortfolio: PortfolioYoutubeVideoItem[] = [
   {
-    type: "drive",
-    url: "https://drive.google.com/file/d/1Qf2gtenj8Vrbyu2k-EY1MjbCgsFFgi0x/view?usp=sharing",
-    video: "/portfolio/videos/lifestyle/prada.mp4",
+    type: "youtube",
+    url: "https://youtube.com/shorts/6yP9dYkWPrY",
     title: "Prada",
     subtitle: "Unboxing",
     category: "FASHION",
     poster: "/portfolio/assets/lifestyle/prada.jpg",
   },
   {
-    type: "drive",
-    url: "https://drive.google.com/file/d/1lpw0nrHSc35P-GRjC8fC5Uj28-T9YkYJ/view?usp=sharing",
-    video: "/portfolio/videos/lifestyle/rituals.mp4",
+    type: "youtube",
+    url: "https://youtube.com/shorts/wprReFDmm3k",
     title: "Rituals",
     subtitle: "Product Review",
     category: "BEAUTY",
     poster: "/portfolio/assets/lifestyle/rituals.jpg",
   },
   {
-    type: "drive",
-    url: "https://drive.google.com/file/d/1PvyazwDdSbAbddaLRsAiigFC_4FpPiKM/view?usp=sharing",
-    video: "/portfolio/videos/lifestyle/dji-osmo.mp4",
-    title: "DJI Osmo",
-    subtitle: "Unboxing",
-    category: "TECH",
-    poster: "/portfolio/assets/lifestyle/dji-osmo.jpg",
+    type: "youtube",
+    url: "https://youtube.com/shorts/m0kZJLalfDo",
+    title: "Aurlux",
+    subtitle: "Testimonial",
+    category: "BEAUTY",
+    poster: "/portfolio/assets/lifestyle/aurlux.jpg",
   },
   {
-    type: "drive",
-    url: "https://drive.google.com/file/d/1rNFb-01L_cUrw7JT8Ohd5hSdwSVvY4ds/view?usp=sharing",
-    video: "/portfolio/videos/lifestyle/kiko-milano.mp4",
+    type: "youtube",
+    url: "https://youtube.com/shorts/2azeMeM2sEM",
     title: "Kiko Milano",
     subtitle: "Problem/Solution",
     category: "BEAUTY",
@@ -154,40 +147,36 @@ export const lifestylePortfolio: PortfolioDriveVideoItem[] = [
 ];
 
 /**
- * Travel gallery — add matching MP4 files under public/portfolio/videos/travel/.
+ * Travel gallery — set `url` to a public YouTube Shorts link.
  */
-export const travelPortfolio: PortfolioDriveVideoItem[] = [
+export const travelPortfolio: PortfolioYoutubeVideoItem[] = [
   {
-    type: "drive",
-    url: "https://drive.google.com/file/d/1CdnaVPV6vAhq65PPvw4QXgXnexyw8OFn/view?usp=sharing",
-    video: "/portfolio/videos/travel/royal-caribbean.mp4",
+    type: "youtube",
+    url: "https://www.youtube.com/shorts/u_xElmWrElE",
     title: "Royal Caribbean",
     subtitle: "Experience Storytelling",
     category: "CRUISE",
     poster: "/portfolio/assets/travel/royal-caribbean.jpg",
   },
   {
-    type: "drive",
-    url: "https://drive.google.com/file/d/1N2RJTeyjouzr91xMzPxU4zDMx4jDWvr1/view?usp=sharing",
-    video: "/portfolio/videos/travel/primark.mp4",
+    type: "youtube",
+    url: "https://www.youtube.com/shorts/tmpPtCcyDaI",
     title: "Primark",
     subtitle: "Testimonial Video Content",
     category: "LUGGAGE",
     poster: "/portfolio/assets/travel/primark.jpg",
   },
   {
-    type: "drive",
-    url: "https://drive.google.com/file/d/1cOLJjMS1gtjTFzpoSXc4C8eSFuVcUEcc/view?usp=sharing",
-    video: "/portfolio/videos/travel/acropolis.mp4",
+    type: "youtube",
+    url: "https://www.youtube.com/shorts/K7R-xPlNl1U",
     title: "Acropolis",
     subtitle: "Voiceover Storytelling",
     category: "EXPERIENCE",
     poster: "/portfolio/assets/travel/acropolis.jpg",
   },
   {
-    type: "drive",
-    url: "https://drive.google.com/file/d/16zG-wF2Liwd7a2vkH-qQGGtNsL0eJppg/view?usp=sharing",
-    video: "/portfolio/videos/travel/finn-lough.mp4",
+    type: "youtube",
+    url: "https://www.youtube.com/shorts/MRtSr_447fM",
     title: "Finn Lough",
     subtitle: "Experience Storytelling",
     category: "HOTEL",
@@ -231,10 +220,10 @@ export const photosPortfolio: PhotosPortfolioItem[] = [
   },
   {
     type: "image",
-    title: "Prada",
+    title: "Iunik",
     subtitle: "Fashion",
     category: "Photography",
-    media: "/portfolio/assets/photos/05.jpg",
+    media: "/portfolio/assets/photos/06.jpg",
     gridSlot: "right",
   },
 ];
@@ -305,8 +294,8 @@ export const contactContent = {
   email: "PASSAPORTERF@GMAIL.COM",
   href: "mailto:passaporterf@gmail.com",
   social: [
-    { label: "Instagram", href: "https://instagram.com/passaporterf" },
-    { label: "TikTok", href: "https://tiktok.com/@passaporterf" },
+    { label: "Instagram", href: "https://instagram.com/passaporterf.ugc" },
+    { label: "TikTok", href: "https://tiktok.com/@passaporterf.ugc" },
     { label: "YouTube", href: "https://youtube.com/@passaporterf" },
     { label: "Email", href: "mailto:passaporterf@gmail.com" },
     { label: "Website", href: "https://passaporterf.com" },
