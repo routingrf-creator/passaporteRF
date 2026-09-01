@@ -38,14 +38,22 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>("pt");
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY) as Locale | null;
-    const initial = stored ?? detectBrowserLocale();
-    setLocaleState(initial);
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY) as Locale | null;
+      const initial = stored ?? detectBrowserLocale();
+      setLocaleState(initial);
+    } catch {
+      setLocaleState(detectBrowserLocale());
+    }
   }, []);
 
   function setLocale(next: Locale) {
     setLocaleState(next);
-    localStorage.setItem(STORAGE_KEY, next);
+    try {
+      localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      // Ignore storage restrictions in private / hardened browser modes.
+    }
   }
 
   return (

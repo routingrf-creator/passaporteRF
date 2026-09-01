@@ -36,7 +36,7 @@ export function usePortfolioPage() {
         href: contactContent.href,
         social: contactContent.social,
       },
-      driveVideo: p.driveVideo,
+      portfolioVideo: p.portfolioVideo,
       mediaKitDownload: p.mediaKitDownload,
       assets: portfolioAssets,
       lifestylePortfolio: lifestylePortfolio.map((item, index) => ({

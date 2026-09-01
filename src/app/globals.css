@@ -136,6 +136,9 @@ html.portfolio-page .portfolio-editorial {
   color: #8a7b58;
 }
 
+/*
+ * Custom portfolio HTML5 video player.
+ */
 .portfolio-video-scrubber::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;

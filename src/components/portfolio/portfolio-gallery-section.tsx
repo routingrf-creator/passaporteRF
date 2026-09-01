@@ -1,10 +1,10 @@
 "use client";
 
 import type { PortfolioGalleryItem } from "@/content/portfolio";
-import { isDriveVideoItem } from "@/content/portfolio";
+import { isYoutubeVideoItem } from "@/content/portfolio";
 import { usePortfolioPage } from "@/hooks/use-portfolio-page";
 import { PortfolioMedia } from "./portfolio-media";
-import { DriveVideoEmbed } from "./drive-video-embed";
+import { YoutubeShortsVideoEmbed } from "./youtube-shorts-video-embed";
 import {
   PortfolioDivider,
   PortfolioPageShell,
@@ -38,8 +38,8 @@ function ShowcaseCard({
   return (
     <StaggerItem>
       <article>
-        {isDriveVideoItem(item) ? (
-          <DriveVideoEmbed
+        {isYoutubeVideoItem(item) ? (
+          <YoutubeShortsVideoEmbed
             item={item}
             priority={index < 2}
             isActive={activeVideoUrl === item.url}
@@ -97,10 +97,10 @@ export function PortfolioGallerySection({
         <PortfolioScriptLabel>{title}</PortfolioScriptLabel>
       </Reveal>
 
-      <StaggerReveal className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
+      <StaggerReveal className="grid grid-cols-1 gap-8 xl:grid-cols-4 xl:gap-6">
         {items.map((item, index) => (
           <ShowcaseCard
-            key={`${item.title}-${isDriveVideoItem(item) ? item.url : "media" in item ? item.media : index}`}
+            key={`${item.title}-${isYoutubeVideoItem(item) ? item.url : "media" in item ? item.media : index}`}
             item={item}
             index={index}
             activeVideoUrl={activeVideoUrl}

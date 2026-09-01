@@ -54,7 +54,7 @@ export const portfolioPagePt = {
   lifestyleItems: [
     { title: "Prada", subtitle: "Unboxing", category: "MODA" },
     { title: "Rituals", subtitle: "Review de Produto", category: "BELEZA" },
-    { title: "DJI Osmo", subtitle: "Unboxing", category: "TECH" },
+    { title: "Aurlux", subtitle: "Depoimento", category: "BELEZA" },
     { title: "Kiko Milano", subtitle: "Problema/Solução", category: "BELEZA" },
   ],
   travelItems: [
@@ -142,10 +142,10 @@ export const portfolioPagePt = {
     subheading: "CONTATO",
     label: "ENVIE UM E-MAIL PARA",
   },
-  driveVideo: {
+  portfolioVideo: {
     label: "Vídeo",
     invalidLink:
-      "Link do Google Drive inválido. Atualize url em src/content/portfolio.ts.",
+      "Link do YouTube Shorts inválido. Atualize url em src/content/portfolio.ts.",
     play: "Reproduzir vídeo",
     pause: "Pausar vídeo",
     close: "Fechar vídeo",
@@ -153,9 +153,8 @@ export const portfolioPagePt = {
     fullscreen: "Tela cheia",
     exitFullscreen: "Sair da tela cheia",
     loading: "Carregando vídeo",
-    loadError: "Não foi possível carregar o vídeo. Verifique o arquivo MP4.",
-    missingFile:
-      "Arquivo de vídeo não encontrado. Adicione o MP4 em public/portfolio/videos/.",
+    loadError:
+      "Não foi possível carregar o vídeo. Verifique se o Short está público.",
   },
   mediaKitDownload: "Baixar Media Kit",
 } as const;
@@ -216,7 +215,7 @@ export const portfolioPageEn = {
   lifestyleItems: [
     { title: "Prada", subtitle: "Unboxing", category: "FASHION" },
     { title: "Rituals", subtitle: "Product Review", category: "BEAUTY" },
-    { title: "DJI Osmo", subtitle: "Unboxing", category: "TECH" },
+    { title: "Aurlux", subtitle: "Testimonial", category: "BEAUTY" },
     { title: "Kiko Milano", subtitle: "Problem/Solution", category: "BEAUTY" },
   ],
   travelItems: [
@@ -304,10 +303,10 @@ export const portfolioPageEn = {
     subheading: "CONTACT",
     label: "EMAIL US AT",
   },
-  driveVideo: {
+  portfolioVideo: {
     label: "Video",
     invalidLink:
-      "Invalid Google Drive link. Update url in src/content/portfolio.ts.",
+      "Invalid YouTube Shorts link. Update url in src/content/portfolio.ts.",
     play: "Play video",
     pause: "Pause video",
     close: "Close video",
@@ -315,9 +314,8 @@ export const portfolioPageEn = {
     fullscreen: "Full screen",
     exitFullscreen: "Exit full screen",
     loading: "Loading video",
-    loadError: "Could not load the video. Check the MP4 file.",
-    missingFile:
-      "Video file not found. Add the MP4 under public/portfolio/videos/.",
+    loadError:
+      "Could not load the video. Check that the Short is public.",
   },
   mediaKitDownload: "Download Media Kit",
 } as const;
@@ -378,7 +376,7 @@ export const portfolioPageEs = {
   lifestyleItems: [
     { title: "Prada", subtitle: "Unboxing", category: "MODA" },
     { title: "Rituals", subtitle: "Reseña de Producto", category: "BELLEZA" },
-    { title: "DJI Osmo", subtitle: "Unboxing", category: "TECH" },
+    { title: "Aurlux", subtitle: "Testimonial", category: "BELLEZA" },
     { title: "Kiko Milano", subtitle: "Problema/Solución", category: "BELLEZA" },
   ],
   travelItems: [
@@ -466,10 +464,10 @@ export const portfolioPageEs = {
     subheading: "CONTACTO",
     label: "ENVÍANOS UN CORREO A",
   },
-  driveVideo: {
+  portfolioVideo: {
     label: "Video",
     invalidLink:
-      "Enlace de Google Drive no válido. Actualiza url en src/content/portfolio.ts.",
+      "Enlace de YouTube Shorts no válido. Actualiza url en src/content/portfolio.ts.",
     play: "Reproducir video",
     pause: "Pausar video",
     close: "Cerrar video",
@@ -477,9 +475,8 @@ export const portfolioPageEs = {
     fullscreen: "Pantalla completa",
     exitFullscreen: "Salir de pantalla completa",
     loading: "Cargando video",
-    loadError: "No se pudo cargar el video. Verifica el archivo MP4.",
-    missingFile:
-      "Archivo de video no encontrado. Añade el MP4 en public/portfolio/videos/.",
+    loadError:
+      "No se pudo cargar el video. Verifica que el Short sea público.",
   },
   mediaKitDownload: "Descargar Media Kit",
 } as const;
@@ -540,7 +537,7 @@ export const portfolioPageFr = {
   lifestyleItems: [
     { title: "Prada", subtitle: "Unboxing", category: "MODE" },
     { title: "Rituals", subtitle: "Test Produit", category: "BEAUTÉ" },
-    { title: "DJI Osmo", subtitle: "Unboxing", category: "TECH" },
+    { title: "Aurlux", subtitle: "Témoignage", category: "BEAUTÉ" },
     { title: "Kiko Milano", subtitle: "Problème/Solution", category: "BEAUTÉ" },
   ],
   travelItems: [
@@ -628,10 +625,10 @@ export const portfolioPageFr = {
     subheading: "CONTACT",
     label: "ÉCRIVEZ-NOUS À",
   },
-  driveVideo: {
+  portfolioVideo: {
     label: "Vidéo",
     invalidLink:
-      "Lien Google Drive invalide. Mettez à jour url dans src/content/portfolio.ts.",
+      "Lien YouTube Shorts invalide. Mettez à jour url dans src/content/portfolio.ts.",
     play: "Lire la vidéo",
     pause: "Mettre en pause",
     close: "Fermer la vidéo",
@@ -639,9 +636,8 @@ export const portfolioPageFr = {
     fullscreen: "Plein écran",
     exitFullscreen: "Quitter le plein écran",
     loading: "Chargement de la vidéo",
-    loadError: "Impossible de charger la vidéo. Vérifiez le fichier MP4.",
-    missingFile:
-      "Fichier vidéo introuvable. Ajoutez le MP4 dans public/portfolio/videos/.",
+    loadError:
+      "Impossible de charger la vidéo. Vérifiez que le Short est public.",
   },
   mediaKitDownload: "Télécharger le Media Kit",
 } as const;
@@ -702,7 +698,7 @@ export const portfolioPageDe = {
   lifestyleItems: [
     { title: "Prada", subtitle: "Unboxing", category: "MODE" },
     { title: "Rituals", subtitle: "Produktreview", category: "BEAUTY" },
-    { title: "DJI Osmo", subtitle: "Unboxing", category: "TECH" },
+    { title: "Aurlux", subtitle: "Testimonial", category: "BEAUTY" },
     { title: "Kiko Milano", subtitle: "Problem/Lösung", category: "BEAUTY" },
   ],
   travelItems: [
@@ -790,10 +786,10 @@ export const portfolioPageDe = {
     subheading: "KONTAKT",
     label: "SCHREIBEN SIE UNS AN",
   },
-  driveVideo: {
+  portfolioVideo: {
     label: "Video",
     invalidLink:
-      "Ungültiger Google-Drive-Link. Aktualisieren Sie url in src/content/portfolio.ts.",
+      "Ungültiger YouTube-Shorts-Link. Aktualisieren Sie url in src/content/portfolio.ts.",
     play: "Video abspielen",
     pause: "Video pausieren",
     close: "Video schließen",
@@ -801,9 +797,8 @@ export const portfolioPageDe = {
     fullscreen: "Vollbild",
     exitFullscreen: "Vollbild beenden",
     loading: "Video wird geladen",
-    loadError: "Video konnte nicht geladen werden. MP4-Datei prüfen.",
-    missingFile:
-      "Videodatei nicht gefunden. MP4 unter public/portfolio/videos/ hinzufügen.",
+    loadError:
+      "Video konnte nicht geladen werden. Prüfen Sie, ob der Short öffentlich ist.",
   },
   mediaKitDownload: "Media Kit herunterladen",
 } as const;
